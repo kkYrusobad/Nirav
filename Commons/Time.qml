@@ -48,4 +48,31 @@ Singleton {
 
     return `${year}${month}${day}-${hours}${minutes}${seconds}`;
   }
+
+  // Format an easy to read approximate duration ex: "4h 32m"
+  // Used for battery time remaining, uptime, etc.
+  function formatVagueHumanReadableDuration(totalSeconds) {
+    if (typeof totalSeconds !== 'number' || totalSeconds < 0) {
+      return '0s';
+    }
+
+    totalSeconds = Math.floor(totalSeconds);
+
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    const parts = [];
+    if (days) parts.push(`${days}d`);
+    if (hours) parts.push(`${hours}h`);
+    if (minutes) parts.push(`${minutes}m`);
+
+    // Only show seconds if no hours and no minutes
+    if (!hours && !minutes) {
+      parts.push(`${seconds}s`);
+    }
+
+    return parts.join(' ') || '0s';
+  }
 }

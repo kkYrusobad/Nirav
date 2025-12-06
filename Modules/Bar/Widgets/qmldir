@@ -1,2 +1,4 @@
 module qs.Modules.Bar.Widgets
 Workspace 1.0 Workspace.qml
+Battery 1.0 Battery.qml
+

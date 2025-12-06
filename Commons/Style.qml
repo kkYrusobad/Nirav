@@ -49,7 +49,7 @@ Singleton {
   readonly property int animationSlow: 450
 
   // Bar Dimensions
-  readonly property real barHeight: 32
+  readonly property real barHeight: 28
 
   // Opacity
   readonly property real opacityLight: 0.25

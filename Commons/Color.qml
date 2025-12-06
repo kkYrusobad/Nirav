@@ -20,6 +20,16 @@ Singleton {
   readonly property color mTertiary: "#8ec07c"      // Aqua
   readonly property color mOnTertiary: "#1d2021"    // Dark BG
 
+  // --- Additional Gruvbox Colors ---
+  readonly property color mOrange: "#fe8019"
+  readonly property color mOnOrange: "#1d2021"
+
+  readonly property color mBlue: "#83a598"
+  readonly property color mOnBlue: "#1d2021"
+
+  readonly property color mPurple: "#d3869b"
+  readonly property color mOnPurple: "#1d2021"
+
   // --- Utility Colors ---
   readonly property color mError: "#fb4934"         // Red
   readonly property color mOnError: "#1d2021"

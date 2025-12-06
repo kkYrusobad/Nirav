@@ -19,6 +19,7 @@ The name combines **Niri** + **Gruv**box, and references the Sanskrit word **न
 
 - 🎨 **Gruvbox Material Dark** color scheme
 - 🖥️ **Workspace indicators** with Nerd Font icons and smooth animations
+- 🔋 **Battery widget** with hover effects, themed expansion, and right-click to open `battop` in a floating window
 - 🕐 **Live clock** display
 - ⌨️ **JetBrainsMono Nerd Font** throughout
 
@@ -77,10 +78,17 @@ niruv/
 │   └── Bar/                   # Top bar module
 │       ├── Bar.qml            # Main bar component
 │       └── Widgets/
-│           └── Workspace.qml  # Workspace indicators
+│           ├── Workspace.qml  # Workspace indicators
+│           └── Battery.qml    # Battery status widget
 └── Services/
-    └── Compositor/
-        └── NiriService.qml    # Niri IPC integration
+    ├── Compositor/
+    │   └── NiriService.qml    # Niri IPC integration
+    ├── Hardware/
+    │   └── BatteryService.qml # Battery icon logic
+    ├── Networking/
+    │   └── BluetoothService.qml # Bluetooth battery support
+    └── UI/
+        └── ToastService.qml   # Desktop notifications
 ```
 
 ## 🙏 Acknowledgments

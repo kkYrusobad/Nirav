@@ -1,0 +1,2 @@
+module qs.Services.Networking
+singleton BluetoothService 1.0 BluetoothService.qml

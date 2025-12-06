@@ -21,6 +21,17 @@ Item {
     color: Color.mSurface
   }
 
+  // Center Branding (Absolute positioning to avoid shifting)
+  Text {
+    anchors.centerIn: parent
+    text: "kkY - Niruv"
+    color: Color.mPrimary
+    font.family: Style.fontFamily
+    font.pixelSize: Style.fontSizeM
+    font.weight: Style.fontWeightSemiBold
+    z: 1 // Ensure it's above background
+  }
+
   // Bar content layout
   RowLayout {
     anchors.fill: parent
@@ -40,40 +51,44 @@ Item {
       }
     }
 
-    // Center section - Branding
+    // Spacer to push right section to the end
     Item {
       Layout.fillWidth: true
-      Layout.alignment: Qt.AlignVCenter
-
-      Text {
-        anchors.centerIn: parent
-        text: "kkY - Niruv"
-        color: Color.mPrimary
-        font.family: Style.fontFamily
-        font.pixelSize: Style.fontSizeM
-        font.weight: Style.fontWeightSemiBold
-      }
     }
 
-    // Right section - Clock
+    // Right section - Battery and Clock
     Item {
       Layout.fillHeight: true
-      Layout.preferredWidth: clockText.implicitWidth + Style.marginM
+      Layout.preferredWidth: rightRow.width + Style.marginM
 
-      Text {
-        id: clockText
+      Row {
+        id: rightRow
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
-        color: Color.mOnSurface
-        font.family: Style.fontFamily
-        font.pixelSize: Style.fontSizeM
-        font.weight: Style.fontWeightMedium
+        spacing: Style.marginM
 
-        text: {
-          var now = Time.now;
-          var hours = String(now.getHours()).padStart(2, '0');
-          var minutes = String(now.getMinutes()).padStart(2, '0');
-          return hours + ":" + minutes;
+        // Battery widget
+        Battery {
+          id: batteryWidget
+          anchors.verticalCenter: parent.verticalCenter
+          screen: root.screen
+        }
+
+        // Clock
+        Text {
+          id: clockText
+          anchors.verticalCenter: parent.verticalCenter
+          color: Color.mOnSurface
+          font.family: Style.fontFamily
+          font.pixelSize: Style.fontSizeM
+          font.weight: Style.fontWeightMedium
+
+          text: {
+            var now = Time.now;
+            var hours = String(now.getHours()).padStart(2, '0');
+            var minutes = String(now.getMinutes()).padStart(2, '0');
+            return hours + ":" + minutes;
+          }
         }
       }
     }
