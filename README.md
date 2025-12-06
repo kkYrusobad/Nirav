@@ -23,6 +23,16 @@ The name combines **Niri** + **Gruv**box, and references the Sanskrit word **न
 - 🕐 **Live clock** display
 - ⌨️ **JetBrainsMono Nerd Font** throughout
 
+## 📚 Documentation
+
+For detailed guides on installation, configuration, and development, please refer to the full documentation:
+
+- [**Introduction**](Documentation/01_Introduction.md)
+- [**Installation Guide**](Documentation/02_Installation.md)
+- [**Configuration**](Documentation/03_Configuration.md)
+- [**Architecture & Development**](Documentation/04_Architecture_and_Development.md)
+- [**Widgets & Theming**](Documentation/05_Widgets_and_Theming.md)
+
 ## 📦 Requirements
 
 | Dependency | Description |
