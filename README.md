@@ -5,6 +5,10 @@
   </p>
 </p>
 
+<p align="center">
+  <img src="screenshot-2025-12-06_15-44-03.png" alt="Niruv Screenshot" width="800">
+</p>
+
 ---
 
 **Niruv** is a lightweight desktop shell built on [Quickshell](https://quickshell.outfoxxed.me/) (Qt/QML) for the [Niri](https://github.com/YaLTeR/niri) Wayland compositor.
