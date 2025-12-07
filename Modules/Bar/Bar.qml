@@ -46,9 +46,9 @@ Item {
 
       text: {
         var now = Time.now;
-        var hours = String(now.getHours()).padStart(2, '0');
-        var minutes = String(now.getMinutes()).padStart(2, '0');
-        return hours + ":" + minutes;
+        var date = now.toLocaleDateString(Qt.locale(), "ddd, MMM d");
+        var time = now.toLocaleTimeString(Qt.locale(), "hh:mm");
+        return date + "  " + time;
       }
     }
   }
@@ -88,6 +88,18 @@ Item {
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
         spacing: Style.marginM
+
+        // WiFi widget
+        WiFi {
+          anchors.verticalCenter: parent.verticalCenter
+          screen: root.screen
+        }
+
+        // Bluetooth widget
+        Bluetooth {
+          anchors.verticalCenter: parent.verticalCenter
+          screen: root.screen
+        }
 
         // Screen Recorder
         ScreenRecorder {

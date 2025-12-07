@@ -157,8 +157,9 @@ Item {
     anchors.verticalCenter: parent.verticalCenter
     anchors.horizontalCenter: parent.horizontalCenter
     spacing: Style.marginXS
+    layoutDirection: Qt.RightToLeft  // Icon stays right, text expands left
 
-    // Battery icon
+    // Battery icon (first due to RightToLeft layout)
     Text {
       id: batteryIcon
       anchors.verticalCenter: parent.verticalCenter
@@ -182,7 +183,7 @@ Item {
       }
     }
 
-    // Percentage text container (expands on hover with delay)
+    // Percentage text container (expands to the left)
     Item {
       id: percentContainer
       height: parent.height
@@ -192,7 +193,7 @@ Item {
 
       Behavior on width {
         NumberAnimation {
-          duration: Style.animationNormal
+          duration: Style.animationFast
           easing.type: Easing.OutCubic
         }
       }
@@ -200,7 +201,7 @@ Item {
       Text {
         id: percentText
         anchors.verticalCenter: parent.verticalCenter
-        anchors.right: parent.right
+        anchors.left: parent.left
         text: isReady ? percent + "%" : "—"
         color: {
           if (!initComplete) return Color.transparent;

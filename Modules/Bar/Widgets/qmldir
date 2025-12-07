@@ -2,4 +2,5 @@ module qs.Modules.Bar.Widgets
 Workspace 1.0 Workspace.qml
 Battery 1.0 Battery.qml
 ScreenRecorder 1.0 ScreenRecorder.qml
-
+WiFi 1.0 WiFi.qml
+Bluetooth 1.0 Bluetooth.qml
