@@ -36,6 +36,15 @@ Niruv uses global singletons for shared state and utilities:
 
 Logic is separated from UI into Services. For example, `BatteryService.qml` handles UPower integration, exposing properties that `Battery.qml` (the widget) simply displays.
 
+Key services include:
+
+- **SystemStatService**: Reads CPU/RAM/Temperature/Load from `/proc/` filesystem
+- **BatteryService**: UPower integration for battery status
+- **CavaService**: Manages the Cava audio visualizer process
+- **BluetoothService**: Bluetooth device battery monitoring
+- **ApplicationsService**: Desktop app listing and fuzzy search
+- **MenuService**: System menu categories and actions
+
 ## 🤝 Contributing
 
 ### Creating a New Widget

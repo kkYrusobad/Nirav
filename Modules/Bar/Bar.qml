@@ -181,6 +181,12 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
         spacing: Style.marginM
 
+        // Wallpaper widget
+        Wallpaper {
+          anchors.verticalCenter: parent.verticalCenter
+          screen: root.screen
+        }
+
         // WiFi widget
         WiFi {
           anchors.verticalCenter: parent.verticalCenter

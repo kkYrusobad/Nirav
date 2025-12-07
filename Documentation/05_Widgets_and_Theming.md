@@ -59,3 +59,23 @@ Displays Niri workspaces with smooth animations.
 ### Clock Widget
 
 A simple, elegant clock displaying the current time and date. Clicking it can be configured to open a calendar or other utility.
+
+### SystemMonitor Widget
+
+Displays real-time system statistics in a compact capsule format.
+
+- **CPU Usage**: Shows percentage with threshold warning (turns red when >80%)
+- **RAM Usage**: Shows percentage with threshold warning (turns red when >80%)
+- **CPU Temperature**: Displays in degrees, turns red when >80°C
+- **Load Average**: Shows 1-minute system load
+- **Hover Effect**: Capsule background turns blue on hover
+- **Service**: Uses `SystemStatService.qml` to poll `/proc/` filesystem every 3 seconds
+
+### Wallpaper Widget
+
+A quick wallpaper changer widget.
+
+- **Click Action**: Sets a random wallpaper from `~/Pictures/Wallpapers` using `swaybg`
+- **Supported Formats**: JPG, JPEG, PNG, WebP
+- **Hover Effect**: Background pill appears on hover
+- **Script**: Uses `oNIgiRI/bin/niri-random-wallpaper` for reliable process handling

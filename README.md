@@ -28,6 +28,8 @@ The name combines **Niri** + **Gruv**box, and references the Sanskrit word **न
 
 - 🎨 **Gruvbox Material Dark** color scheme
 - 🖥️ **Workspace indicators** with Nerd Font icons and smooth animations
+- 📊 **System Monitor** showing CPU%, RAM%, temperature, and load average with threshold alerts
+- 🖼️ **Wallpaper widget** click to set random wallpaper via swaybg
 - 🔋 **Battery widget** with hover effects, themed expansion, and right-click to open `battop` in a floating window
 - 🎥 **Screen Recorder** with recording status, hover expansion, and direct launch
 - 📶 **WiFi widget** with SSID display on hover, click to open `impala` TUI
@@ -104,6 +106,8 @@ niruv/
 │   │   ├── Bar.qml            # Main bar component
 │   │   └── Widgets/
 │   │       ├── Workspace.qml  # Workspace indicators
+│   │       ├── SystemMonitor.qml # CPU/RAM/Temp/Load display
+│   │       ├── Wallpaper.qml  # Random wallpaper setter
 │   │       ├── Battery.qml    # Battery status widget
 │   │       ├── ScreenRecorder.qml # Screen recording widget
 │   │       ├── WiFi.qml       # WiFi status widget
@@ -123,7 +127,8 @@ niruv/
     │   └── BluetoothService.qml # Bluetooth battery support
     ├── System/
     │   ├── ApplicationsService.qml # App listing + search
-    │   └── MenuService.qml    # System menu categories + actions
+    │   ├── MenuService.qml    # System menu categories + actions
+    │   └── SystemStatService.qml # CPU/RAM/Temp/Load stats
     └── UI/
         └── ToastService.qml   # Desktop notifications
 ```

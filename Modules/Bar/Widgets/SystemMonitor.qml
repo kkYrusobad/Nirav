@@ -117,7 +117,7 @@ Item {
 
       Text {
         text: ""
-        color: mouseArea.containsMouse ? Color.mBlue : (SystemStatService.cpuTemp > 80 ? Color.mError : Color.mBlue)
+        color: mouseArea.containsMouse ? Color.mOnPrimary : (SystemStatService.cpuTemp > 80 ? Color.mError : Color.mBlue)
         font.family: Style.fontFamily
         font.pixelSize: Style.fontSizeL
         anchors.verticalCenter: parent.verticalCenter
