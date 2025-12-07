@@ -142,15 +142,26 @@ Item {
     anchors.rightMargin: 48
     spacing: Style.marginM
 
-    // Left section - Workspaces
+    // Left section - Workspaces and SystemMonitor
     Item {
       Layout.fillHeight: true
-      Layout.preferredWidth: workspaceWidget.implicitWidth
+      Layout.preferredWidth: leftRow.width
 
-      Workspace {
-        id: workspaceWidget
+      Row {
+        id: leftRow
         anchors.verticalCenter: parent.verticalCenter
-        screen: root.screen
+        spacing: Style.marginM
+
+        Workspace {
+          id: workspaceWidget
+          anchors.verticalCenter: parent.verticalCenter
+          screen: root.screen
+        }
+
+        SystemMonitor {
+          anchors.verticalCenter: parent.verticalCenter
+          screen: root.screen
+        }
       }
     }
 

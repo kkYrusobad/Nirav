@@ -6,3 +6,4 @@ WiFi 1.0 WiFi.qml
 Bluetooth 1.0 Bluetooth.qml
 Media 1.0 Media.qml
 Visualizer 1.0 Visualizer.qml
+SystemMonitor 1.0 SystemMonitor.qml

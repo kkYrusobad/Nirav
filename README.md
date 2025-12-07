@@ -30,7 +30,11 @@ The name combines **Niri** + **Gruv**box, and references the Sanskrit word **न
 - 🖥️ **Workspace indicators** with Nerd Font icons and smooth animations
 - 🔋 **Battery widget** with hover effects, themed expansion, and right-click to open `battop` in a floating window
 - 🎥 **Screen Recorder** with recording status, hover expansion, and direct launch
-- 🕐 **Live clock** display
+- 📶 **WiFi widget** with SSID display on hover, click to open `impala` TUI
+- 🔵 **Bluetooth widget** with connected device display, click to open `bluetui`
+- 🎵 **Media widget** showing current track (Artist - Title), play/pause/next controls
+- 🎼 **Cava Visualizer** integrated audio spectrum display
+- 🕐 **Live clock** display (centered with logo icons)
 - ⌨️ **JetBrainsMono Nerd Font** throughout
 - 🚀 **Minimalist Launcher** with app search + system menu (Tab to switch modes)
 
@@ -100,7 +104,12 @@ niruv/
 │   │   ├── Bar.qml            # Main bar component
 │   │   └── Widgets/
 │   │       ├── Workspace.qml  # Workspace indicators
-│   │       └── Battery.qml    # Battery status widget
+│   │       ├── Battery.qml    # Battery status widget
+│   │       ├── ScreenRecorder.qml # Screen recording widget
+│   │       ├── WiFi.qml       # WiFi status widget
+│   │       ├── Bluetooth.qml  # Bluetooth status widget
+│   │       ├── Media.qml      # Media player widget
+│   │       └── Visualizer.qml # Cava audio visualizer
 │   └── Launcher/              # App Launcher + System Menu
 │       └── Launcher.qml       # Minimalist launcher UI
 └── Services/
@@ -108,6 +117,8 @@ niruv/
     │   └── NiriService.qml    # Niri IPC integration
     ├── Hardware/
     │   └── BatteryService.qml # Battery icon logic
+    ├── Media/
+    │   └── CavaService.qml    # Cava audio visualizer service
     ├── Networking/
     │   └── BluetoothService.qml # Bluetooth battery support
     ├── System/
