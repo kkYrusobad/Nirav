@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <video src="Showcase/recording_2025-12-07_21-12-45.mp4" width="800" autoplay loop muted></video>
+  <img src="https://github.com/user-attachments/assets/da7172b0-9a61-4387-8d6a-9b5da72b2cd6" alt="Niruv Showcase" width="800">
 </p>
 
 ---
