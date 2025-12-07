@@ -1,0 +1,2 @@
+module qs.Services.Media
+singleton CavaService 1.0 CavaService.qml
