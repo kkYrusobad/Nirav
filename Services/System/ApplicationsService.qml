@@ -68,7 +68,23 @@ Singleton {
     // First pass: contains match (faster)
     for (let i = 0; i < allApps.length && results.length < 50; i++) {
       const app = allApps[i];
-      if (containsMatch(app.name, q) || containsMatch(app.execName || "", q)) {
+      
+      // Check keywords if available
+      let keywordMatch = false;
+      if (app.keywords && Array.isArray(app.keywords)) {
+        for (let k = 0; k < app.keywords.length; k++) {
+          if (containsMatch(app.keywords[k], q)) {
+            keywordMatch = true;
+            break;
+          }
+        }
+      }
+
+      if (containsMatch(app.name, q) || 
+          containsMatch(app.execName || "", q) || 
+          containsMatch(app.comment || "", q) || 
+          containsMatch(app.id || "", q) ||
+          keywordMatch) {
         results.push(app);
       }
     }
@@ -161,6 +177,7 @@ Singleton {
         execName: execName,
         command: app.command,
         id: app.id,
+        keywords: app.keywords || [],
         runInTerminal: app.runInTerminal,
         _original: app  // Keep reference for execute()
       });

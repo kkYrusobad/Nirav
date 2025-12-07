@@ -40,6 +40,15 @@ The battery widget is more than just a percentage indicator.
 - **Floating Window**: Right-click the icon to launch `battop` in a centered, floating terminal window.
 - **Bluetooth**: Automatically detects and displays battery levels for connected Bluetooth devices.
 
+### Screen Recorder Widget
+
+A minimalist screen recording tool integrated directly into the bar.
+
+- **Status Indication**: Icon changes and background pulses red when recording.
+- **Hover Expansion**: Expands to show "Record?" (idle) or "Recording..." (active) text on hover.
+- **Direct Launch**: Clicking the icon instantly starts recording the screen (or prompts for region selection depending on configuration).
+- **Smooth Animation**: Features smooth text expansion and color transitions.
+
 ### Workspace Widget
 
 Displays Niri workspaces with smooth animations.

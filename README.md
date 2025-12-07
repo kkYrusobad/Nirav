@@ -29,6 +29,7 @@ The name combines **Niri** + **Gruv**box, and references the Sanskrit word **न
 - 🎨 **Gruvbox Material Dark** color scheme
 - 🖥️ **Workspace indicators** with Nerd Font icons and smooth animations
 - 🔋 **Battery widget** with hover effects, themed expansion, and right-click to open `battop` in a floating window
+- 🎥 **Screen Recorder** with recording status, hover expansion, and direct launch
 - 🕐 **Live clock** display
 - ⌨️ **JetBrainsMono Nerd Font** throughout
 - 🚀 **Minimalist Launcher** with app search + system menu (Tab to switch modes)

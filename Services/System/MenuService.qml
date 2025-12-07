@@ -35,6 +35,7 @@ Singleton {
         { name: "Screenshot Region", icon: "󰹑", action: "cmd:niri-cmd-screenshot region" },
         { name: "Screenshot Full", icon: "󰍹", action: "cmd:niri-cmd-screenshot fullscreen" },
         { name: "Screenshot Clipboard", icon: "󰆏", action: "cmd:niri-cmd-screenshot clipboard" },
+        { name: "Screen Record", icon: "", action: "cmd:/home/kky/garbage/noctaliaChange/Niruv/Scripts/niri-record" },
         { name: "Toggle Screensaver", icon: "󱄅", action: "cmd:niri-toggle-screensaver" },
         { name: "Toggle Nightlight", icon: "󰔎", action: "cmd:niri-toggle-nightlight" }
       ]

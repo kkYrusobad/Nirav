@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# niri-record - Toggle screen recording with gpu-screen-recorder
+
+PID_FILE="/tmp/niri-record.pid"
+VIDEO_DIR="$HOME/Videos"
+DATE=$(date +%Y-%m-%d_%H-%M-%S)
+FILENAME="$VIDEO_DIR/recording_$DATE.mp4"
+
+# Ensure video directory exists
+mkdir -p "$VIDEO_DIR"
+
+LOG_FILE="/tmp/niri-record-debug.log"
+echo "$(date): Script started" >> "$LOG_FILE"
+
+# Check if already recording
+if [ -f "$PID_FILE" ]; then
+    PID=$(cat "$PID_FILE")
+    if kill -0 "$PID" 2>/dev/null; then
+        # Stop recording
+        kill -SIGINT "$PID"
+        rm "$PID_FILE"
+        notify-send -a "Screen Recorder" "Recording Stopped" "Saved to $FILENAME" -i "media-record"
+        echo "$(date): Stopped recording PID $PID" >> "$LOG_FILE"
+        exit 0
+    else
+        # Stale PID file
+        rm "$PID_FILE"
+        echo "$(date): Removed stale PID file" >> "$LOG_FILE"
+    fi
+fi
+
+# Start recording (Direct Portal Mode)
+notify-send -a "Screen Recorder" "Recording Started" "Select window/region..." -i "media-record"
+echo "$(date): Starting recording in portal mode" >> "$LOG_FILE"
+
+# Use portal for window selection
+nohup gpu-screen-recorder -w portal -f 60 -a default_output -o "$FILENAME" >/dev/null 2>&1 &
+PID=$!
+echo $PID > "$PID_FILE"
+echo "$(date): Started Portal recording with PID $PID" >> "$LOG_FILE"
+disown

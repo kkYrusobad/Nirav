@@ -37,13 +37,19 @@ Item {
     }
 
     Text {
-      id: brandingText
+      id: clockTextCenter
       anchors.centerIn: parent
-      text: "kkY - Niruv"
-      color: Color.mPrimary
+      color: Color.mOnSurface
       font.family: Style.fontFamily
       font.pixelSize: Style.fontSizeM
       font.weight: Style.fontWeightSemiBold
+
+      text: {
+        var now = Time.now;
+        var hours = String(now.getHours()).padStart(2, '0');
+        var minutes = String(now.getMinutes()).padStart(2, '0');
+        return hours + ":" + minutes;
+      }
     }
   }
 
@@ -51,8 +57,8 @@ Item {
   // Bar content layout
   RowLayout {
     anchors.fill: parent
-    anchors.leftMargin: 4
-    anchors.rightMargin: 4
+    anchors.leftMargin: 6
+    anchors.rightMargin: 6
     spacing: Style.marginM
 
     // Left section - Workspaces
@@ -83,6 +89,11 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
         spacing: Style.marginM
 
+        // Screen Recorder
+        ScreenRecorder {
+          anchors.verticalCenter: parent.verticalCenter
+        }
+
         // Battery widget
         Battery {
           id: batteryWidget
@@ -90,22 +101,7 @@ Item {
           screen: root.screen
         }
 
-        // Clock
-        Text {
-          id: clockText
-          anchors.verticalCenter: parent.verticalCenter
-          color: Color.mOnSurface
-          font.family: Style.fontFamily
-          font.pixelSize: Style.fontSizeM
-          font.weight: Style.fontWeightMedium
 
-          text: {
-            var now = Time.now;
-            var hours = String(now.getHours()).padStart(2, '0');
-            var minutes = String(now.getMinutes()).padStart(2, '0');
-            return hours + ":" + minutes;
-          }
-        }
       }
     }
   }
