@@ -6,17 +6,8 @@
 </p>
 
 <p align="center">
-  <img src="screenshot-2025-12-06_15-44-03.png" alt="Niruv Screenshot" width="800">
+  <video src="Showcase/recording_2025-12-07_21-12-45.mp4" width="800" autoplay loop muted></video>
 </p>
-
-<details>
-<summary>Click to reveal Battery Widget</summary>
-
-<p align="center">
-  <img src="Screenshots/battery.png" alt="Battery Widget" width="800">
-</p>
-
-</details>
 
 ---
 
