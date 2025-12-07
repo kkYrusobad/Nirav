@@ -141,7 +141,7 @@ Item {
     anchors.right: batteryRow.right
     anchors.margins: -Style.marginS
     height: 18 // Matching Workspace active indicator height
-    color: mouseArea.containsMouse ? Color.mBlue: Color.transparent
+    color: mouseArea.containsMouse ? Color.mBlue : Color.transparent
     radius: height / 2
 
     Behavior on color {

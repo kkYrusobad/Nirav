@@ -21,10 +21,11 @@ Item {
     color: Color.mSurface
   }
 
-  // Center Branding (Click to open launcher)
+  // Clock (absolutely centered, click to open launcher)
   MouseArea {
+    id: clockArea
     anchors.centerIn: parent
-    width: brandingText.width + Style.marginM * 2
+    width: clockTextCenter.width + Style.marginM * 2
     height: parent.height
     cursorShape: Qt.PointingHandCursor
     z: 10
@@ -51,6 +52,16 @@ Item {
         return date + "  " + time;
       }
     }
+  }
+
+  // Media widget (anchored to the left of the clock)
+  Media {
+    id: mediaWidget
+    anchors.verticalCenter: parent.verticalCenter
+    anchors.right: clockArea.left
+    anchors.rightMargin: Style.marginS
+    screen: root.screen
+    z: 10
   }
 
 
