@@ -31,6 +31,7 @@ The name combines **Niri** + **Gruv**box, and references the Sanskrit word **न
 - 🔋 **Battery widget** with hover effects, themed expansion, and right-click to open `battop` in a floating window
 - 🕐 **Live clock** display
 - ⌨️ **JetBrainsMono Nerd Font** throughout
+- 🚀 **Minimalist Launcher** with app search + system menu (Tab to switch modes)
 
 ## 📚 Documentation
 
@@ -94,11 +95,13 @@ niruv/
 │   ├── Time.qml               # Clock utilities
 │   └── Settings.qml           # Configuration
 ├── Modules/
-│   └── Bar/                   # Top bar module
-│       ├── Bar.qml            # Main bar component
-│       └── Widgets/
-│           ├── Workspace.qml  # Workspace indicators
-│           └── Battery.qml    # Battery status widget
+│   ├── Bar/                   # Top bar module
+│   │   ├── Bar.qml            # Main bar component
+│   │   └── Widgets/
+│   │       ├── Workspace.qml  # Workspace indicators
+│   │       └── Battery.qml    # Battery status widget
+│   └── Launcher/              # App Launcher + System Menu
+│       └── Launcher.qml       # Minimalist launcher UI
 └── Services/
     ├── Compositor/
     │   └── NiriService.qml    # Niri IPC integration
@@ -106,6 +109,9 @@ niruv/
     │   └── BatteryService.qml # Battery icon logic
     ├── Networking/
     │   └── BluetoothService.qml # Bluetooth battery support
+    ├── System/
+    │   ├── ApplicationsService.qml # App listing + search
+    │   └── MenuService.qml    # System menu categories + actions
     └── UI/
         └── ToastService.qml   # Desktop notifications
 ```

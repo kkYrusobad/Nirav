@@ -1,0 +1,178 @@
+pragma Singleton
+
+import QtQuick
+import Quickshell
+
+import qs.Commons
+
+/*
+ * ApplicationsService - Provides app list from Quickshell's DesktopEntries
+ */
+Singleton {
+  id: root
+
+  // All applications from DesktopEntries
+  property var allApps: []
+
+  // Filtered results based on search query
+  property var filteredApps: []
+
+  // Current search query
+  property string searchQuery: ""
+
+  // Loading state
+  property bool isLoaded: false
+
+  Component.onCompleted: {
+    Logger.d("ApplicationsService", "Service initialized");
+    // Delay loading to allow DesktopEntries to become available
+    loadTimer.start();
+  }
+
+  Timer {
+    id: loadTimer
+    interval: 100
+    repeat: false
+    onTriggered: loadApplications()
+  }
+
+  // Simple contains match for performance
+  function containsMatch(text, query) {
+    if (!query) return true;
+    return text.toLowerCase().includes(query.toLowerCase());
+  }
+
+  // Fuzzy match function - simple subsequence matching
+  function fuzzyMatch(text, query) {
+    if (!query) return true;
+    const lowerText = text.toLowerCase();
+    const lowerQuery = query.toLowerCase();
+    let queryIndex = 0;
+    for (let i = 0; i < lowerText.length && queryIndex < lowerQuery.length; i++) {
+      if (lowerText[i] === lowerQuery[queryIndex]) queryIndex++;
+    }
+    return queryIndex === lowerQuery.length;
+  }
+
+  // Filter apps based on search query
+  function filterApps(query) {
+    searchQuery = query;
+    if (!query || query.trim() === "") {
+      filteredApps = allApps.slice(0, 50); // Show first 50 apps when no query
+      return;
+    }
+
+    const q = query.trim();
+    let results = [];
+
+    // First pass: contains match (faster)
+    for (let i = 0; i < allApps.length && results.length < 50; i++) {
+      const app = allApps[i];
+      if (containsMatch(app.name, q) || containsMatch(app.execName || "", q)) {
+        results.push(app);
+      }
+    }
+
+    // Second pass: fuzzy match if not enough results
+    if (results.length < 10) {
+      for (let i = 0; i < allApps.length && results.length < 50; i++) {
+        const app = allApps[i];
+        if (!results.includes(app) && fuzzyMatch(app.name, q)) {
+          results.push(app);
+        }
+      }
+    }
+
+    filteredApps = results;
+  }
+
+  // Clear filter and reload apps
+  function clearFilter() {
+    // Reload apps in case DesktopEntries wasn't ready earlier
+    if (allApps.length === 0) {
+      loadApplications();
+    }
+    searchQuery = "";
+    filteredApps = allApps.slice(0, 50);
+  }
+
+  // Launch an application
+  function launchApp(app) {
+    if (!app) {
+      Logger.w("ApplicationsService", "Cannot launch app - null app");
+      return;
+    }
+
+    Logger.i("ApplicationsService", "Launching: " + app.name);
+
+    // Use the app's execute method if available (from DesktopEntries)
+    if (app._original && app._original.execute && typeof app._original.execute === 'function') {
+      app._original.execute();
+    } else if (app.command && Array.isArray(app.command)) {
+      // Fallback to command array
+      Quickshell.execDetached(app.command);
+    } else {
+      Logger.w("ApplicationsService", "No launch method available for: " + app.name);
+    }
+  }
+
+  // Load all applications from Quickshell's DesktopEntries
+  function loadApplications() {
+    Logger.d("ApplicationsService", "Loading applications from DesktopEntries...");
+
+    // Check if DesktopEntries is available
+    if (typeof DesktopEntries === 'undefined') {
+      Logger.w("ApplicationsService", "DesktopEntries not yet available, retrying...");
+      loadTimer.interval = 500;
+      loadTimer.start();
+      return;
+    }
+
+    const apps = DesktopEntries.applications.values || [];
+    Logger.d("ApplicationsService", "DesktopEntries returned " + apps.length + " entries");
+
+    if (apps.length === 0) {
+      // Maybe not ready yet, retry
+      if (!isLoaded) {
+        loadTimer.interval = 500;
+        loadTimer.start();
+      }
+      return;
+    }
+
+    // Filter and transform apps
+    allApps = [];
+    for (let i = 0; i < apps.length; i++) {
+      const app = apps[i];
+      if (!app || app.noDisplay) continue;
+
+      // Get executable name from command
+      let execName = "";
+      if (app.command && Array.isArray(app.command) && app.command.length > 0) {
+        const cmd = app.command[0];
+        const parts = cmd.split('/');
+        execName = parts[parts.length - 1].split(' ')[0];
+      }
+
+      allApps.push({
+        name: app.name || "Unknown",
+        icon: app.icon || "application-x-executable",
+        comment: app.genericName || app.comment || "",
+        execName: execName,
+        command: app.command,
+        id: app.id,
+        runInTerminal: app.runInTerminal,
+        _original: app  // Keep reference for execute()
+      });
+    }
+
+    // Sort alphabetically
+    allApps.sort((a, b) => a.name.localeCompare(b.name));
+
+    // Initialize filtered apps
+    filteredApps = allApps.slice(0, 50);
+    isLoaded = true;
+
+    Logger.i("ApplicationsService", "Loaded " + allApps.length + " applications");
+  }
+}

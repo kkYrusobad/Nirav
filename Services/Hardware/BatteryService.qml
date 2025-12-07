@@ -19,7 +19,7 @@ Singleton {
     }
 
     if (charging) {
-      return "󰂄";  // battery-charging
+      return " 󱐋";  // battery-charging
     }
 
     // Discharge icons based on percentage

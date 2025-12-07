@@ -1,0 +1,3 @@
+module qs.Services.System
+singleton ApplicationsService 1.0 ApplicationsService.qml
+singleton MenuService 1.0 MenuService.qml

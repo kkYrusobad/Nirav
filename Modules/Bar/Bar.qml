@@ -21,16 +21,32 @@ Item {
     color: Color.mSurface
   }
 
-  // Center Branding (Absolute positioning to avoid shifting)
-  Text {
+  // Center Branding (Click to open launcher)
+  MouseArea {
     anchors.centerIn: parent
-    text: "kkY - Niruv"
-    color: Color.mPrimary
-    font.family: Style.fontFamily
-    font.pixelSize: Style.fontSizeM
-    font.weight: Style.fontWeightSemiBold
-    z: 1 // Ensure it's above background
+    width: brandingText.width + Style.marginM * 2
+    height: parent.height
+    cursorShape: Qt.PointingHandCursor
+    z: 10
+
+    onClicked: {
+      // Access launcher through shellRoot
+      if (typeof shellRoot !== 'undefined' && shellRoot.launcher) {
+        shellRoot.launcher.toggle();
+      }
+    }
+
+    Text {
+      id: brandingText
+      anchors.centerIn: parent
+      text: "kkY - Niruv"
+      color: Color.mPrimary
+      font.family: Style.fontFamily
+      font.pixelSize: Style.fontSizeM
+      font.weight: Style.fontWeightSemiBold
+    }
   }
+
 
   // Bar content layout
   RowLayout {
