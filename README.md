@@ -5,9 +5,11 @@
   </p>
 </p>
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/da7172b0-9a61-4387-8d6a-9b5da72b2cd6" alt="Niruv Showcase" width="800">
-</p>
+<div align="center">
+
+<https://github.com/user-attachments/assets/da7172b0-9a61-4387-8d6a-9b5da72b2cd6>
+
+</div>
 
 ---
 
