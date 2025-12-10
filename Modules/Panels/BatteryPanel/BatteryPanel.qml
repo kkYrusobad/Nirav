@@ -129,6 +129,7 @@ PopupWindow {
         color: Color.mSurfaceVariant
         border.color: Color.mOutline
         border.width: Style.borderS
+        visible: root.isReady
 
         ColumnLayout {
           id: detailsColumn
@@ -139,7 +140,6 @@ PopupWindow {
           // Time remaining/to full
           RowLayout {
             Layout.fillWidth: true
-            visible: root.isReady && (root.battery.timeToEmpty > 0 || root.battery.timeToFull > 0)
 
             Text {
               text: "󰥔"
@@ -164,7 +164,7 @@ PopupWindow {
                 if (!root.charging && root.battery.timeToEmpty > 0) {
                   return Time.formatVagueHumanReadableDuration(root.battery.timeToEmpty);
                 }
-                return "—";
+                return "N/A";
               }
               color: Color.mOnSurface
               font.family: Style.fontFamily
@@ -176,7 +176,6 @@ PopupWindow {
           // Power rate
           RowLayout {
             Layout.fillWidth: true
-            visible: root.isReady && root.battery.changeRate !== undefined && root.battery.changeRate !== 0
 
             Text {
               text: "󱐋"
@@ -194,7 +193,7 @@ PopupWindow {
             }
 
             Text {
-              text: root.battery.changeRate ? Math.abs(root.battery.changeRate).toFixed(1) + " W" : "—"
+              text: root.battery.changeRate && root.battery.changeRate !== 0 ? Math.abs(root.battery.changeRate).toFixed(1) + " W" : "N/A"
               color: Color.mOnSurface
               font.family: Style.fontFamily
               font.pixelSize: Style.fontSizeS
@@ -205,7 +204,6 @@ PopupWindow {
           // Health
           RowLayout {
             Layout.fillWidth: true
-            visible: root.isReady && root.battery.healthPercentage !== undefined && root.battery.healthPercentage > 0
 
             Text {
               text: "󰛨"
@@ -223,7 +221,7 @@ PopupWindow {
             }
 
             Text {
-              text: root.battery.healthPercentage ? Math.round(root.battery.healthPercentage) + "%" : "—"
+              text: root.battery.healthPercentage && root.battery.healthPercentage > 0 ? Math.round(root.battery.healthPercentage) + "%" : "N/A"
               color: Color.mOnSurface
               font.family: Style.fontFamily
               font.pixelSize: Style.fontSizeS

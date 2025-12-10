@@ -103,6 +103,35 @@ PopupWindow {
     color: Color.mSurface
     border.color: Color.mOutline
     border.width: Style.borderS
+    clip: true
+
+    // Album art background (blurred effect via scaling)
+    Image {
+      id: bgAlbumArt
+      anchors.fill: parent
+      anchors.margins: -20  // Extend beyond borders for blur effect
+      source: root.albumArt
+      fillMode: Image.PreserveAspectCrop
+      visible: root.albumArt !== ""
+      opacity: 1.0
+      
+      // Scaling down and up creates soft blur effect
+      sourceSize.width: 100
+      sourceSize.height: 100
+      smooth: true
+      mipmap: true
+    }
+
+    // Semi-transparent overlay for readability
+    Rectangle {
+      anchors.fill: parent
+      color: Color.mSurface
+      opacity: root.albumArt !== "" ? 0.65 : 1.0
+      
+      Behavior on opacity {
+        NumberAnimation { duration: Style.animationNormal }
+      }
+    }
 
     // Shadow effect
     Rectangle {
