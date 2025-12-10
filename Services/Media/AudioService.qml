@@ -12,6 +12,10 @@ import qs.Commons
 Singleton {
   id: root
 
+  // Signals for OSD (using 'Updated' to avoid conflict with property change signals)
+  signal volumeUpdated()
+  signal mutedUpdated()
+
   // Current output device (sink)
   readonly property PwNode sink: Pipewire.ready ? Pipewire.defaultAudioSink : null
 
@@ -23,8 +27,18 @@ Singleton {
     return Math.max(0, Math.min(1.0, vol));
   }
 
+  // Emit signal when volume changes
+  onVolumeChanged: {
+    if (!isSettingVolume) {
+      volumeUpdated();
+    }
+  }
+
   // Muted state
   readonly property bool muted: sink?.audio?.muted ?? true
+
+  // Emit signal when muted changes
+  onMutedChanged: mutedUpdated()
 
   // Volume step for increase/decrease (5%)
   readonly property real stepVolume: 0.05

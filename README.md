@@ -38,6 +38,7 @@ The name combines **Niri** + **Gruv**box, and references the Sanskrit word **न
 - ⌨️ **JetBrainsMono Nerd Font** throughout
 - 🚀 **Minimalist Launcher** with app search + system menu (Tab to switch modes)
 - 🖱️ **Click-outside-to-close** panels - click anywhere outside or press ESC
+- 📺 **On-Screen Display (OSD)** visual feedback for volume/brightness/media changes
 
 ## 📚 Documentation
 
@@ -131,6 +132,8 @@ niruv/
 │   │   └── SystemMonitorPanel/ # Detailed system stats
 │   └── Launcher/              # App Launcher + System Menu
 │       └── Launcher.qml       # Minimalist launcher UI
+│   └── OSD/                   # On-Screen Display
+│       └── OSD.qml            # Volume/brightness/media OSD overlay
 └── Services/
     ├── Compositor/
     │   └── NiriService.qml    # Niri IPC integration

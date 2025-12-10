@@ -20,6 +20,7 @@ import qs.Services.System
 // Modules
 import qs.Modules.Bar
 import qs.Modules.Launcher
+import qs.Modules.OSD
 
 ShellRoot {
   id: shellRoot
@@ -161,6 +162,9 @@ ShellRoot {
       anchors.fill: parent
     }
   }
+
+  // OSD overlay for volume, brightness, and media track changes
+  OSD {}
 
   // TODO: Add IpcHandler when Quickshell version supports it
   // Usage: qs -c niruv ipc call launcher toggle

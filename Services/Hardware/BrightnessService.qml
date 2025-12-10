@@ -12,8 +12,14 @@ import qs.Commons
 Singleton {
   id: root
 
+  // Signal for OSD (using 'Updated' to avoid conflict with property change signal)
+  signal brightnessUpdated()
+
   // Current brightness level (0.0 - 1.0)
   property real brightness: 0.5
+
+  // Emit signal when brightness changes
+  onBrightnessChanged: brightnessUpdated()
 
   // Whether brightness control is available
   property bool available: false
