@@ -6,6 +6,7 @@ import Quickshell.Services.UPower
 import qs.Commons
 import qs.Services.Hardware
 import qs.Services.Networking
+import qs.Services.Power
 
 /*
  * BatteryPanel - Popup panel with detailed battery information
@@ -282,6 +283,169 @@ PopupWindow {
                 font.family: Style.fontFamily
                 font.pixelSize: Style.fontSizeS
                 Layout.fillWidth: true
+              }
+            }
+          }
+        }
+      }
+
+      // Power Profile section
+      Rectangle {
+        Layout.fillWidth: true
+        Layout.preferredHeight: profileColumn.implicitHeight + Style.marginM * 2
+        radius: Style.radiusM
+        color: Color.mSurfaceVariant
+        border.color: Color.mOutline
+        border.width: Style.borderS
+        visible: PowerProfileService.available
+
+        ColumnLayout {
+          id: profileColumn
+          anchors.fill: parent
+          anchors.margins: Style.marginM
+          spacing: Style.marginS
+
+          // Section header
+          RowLayout {
+            Layout.fillWidth: true
+            spacing: Style.marginS
+
+            Text {
+              text: PowerProfileService.getIcon()
+              color: Color.mPrimary
+              font.family: Style.fontFamily
+              font.pixelSize: Style.fontSizeL
+            }
+
+            Text {
+              text: "Power Profile"
+              color: Color.mOnSurface
+              font.family: Style.fontFamily
+              font.pixelSize: Style.fontSizeS
+              font.weight: Style.fontWeightMedium
+              Layout.fillWidth: true
+            }
+          }
+
+          // Profile buttons
+          RowLayout {
+            Layout.fillWidth: true
+            spacing: Style.marginS
+
+            // Power Saver button
+            Rectangle {
+              Layout.fillWidth: true
+              Layout.preferredHeight: 36
+              radius: Style.radiusS
+              color: PowerProfileService.profile === 2 ? Color.mPrimary : (saverMouseArea.containsMouse ? Qt.alpha(Color.mPrimary, 0.2) : "transparent")
+              border.color: PowerProfileService.profile === 2 ? Color.mPrimary : Color.mOutline
+              border.width: 1
+
+              ColumnLayout {
+                anchors.centerIn: parent
+                spacing: -2
+
+                Text {
+                  text: "󰌪"
+                  color: PowerProfileService.profile === 2 ? Color.mOnPrimary : Color.mOnSurface
+                  font.family: Style.fontFamily
+                  font.pixelSize: Style.fontSizeL
+                  Layout.alignment: Qt.AlignHCenter
+                }
+
+                Text {
+                  text: "Saver"
+                  color: PowerProfileService.profile === 2 ? Color.mOnPrimary : Color.mOnSurfaceVariant
+                  font.family: Style.fontFamily
+                  font.pixelSize: 8
+                  Layout.alignment: Qt.AlignHCenter
+                }
+              }
+
+              MouseArea {
+                id: saverMouseArea
+                anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+                onClicked: PowerProfileService.setProfile(2)  // PowerSaver
+              }
+            }
+
+            // Balanced button
+            Rectangle {
+              Layout.fillWidth: true
+              Layout.preferredHeight: 36
+              radius: Style.radiusS
+              color: PowerProfileService.profile === 1 ? Color.mPrimary : (balancedMouseArea.containsMouse ? Qt.alpha(Color.mPrimary, 0.2) : "transparent")
+              border.color: PowerProfileService.profile === 1 ? Color.mPrimary : Color.mOutline
+              border.width: 1
+
+              ColumnLayout {
+                anchors.centerIn: parent
+                spacing: -2
+
+                Text {
+                  text: "󰛲"
+                  color: PowerProfileService.profile === 1 ? Color.mOnPrimary : Color.mOnSurface
+                  font.family: Style.fontFamily
+                  font.pixelSize: Style.fontSizeL
+                  Layout.alignment: Qt.AlignHCenter
+                }
+
+                Text {
+                  text: "Balanced"
+                  color: PowerProfileService.profile === 1 ? Color.mOnPrimary : Color.mOnSurfaceVariant
+                  font.family: Style.fontFamily
+                  font.pixelSize: 8
+                  Layout.alignment: Qt.AlignHCenter
+                }
+              }
+
+              MouseArea {
+                id: balancedMouseArea
+                anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+                onClicked: PowerProfileService.setProfile(1)  // Balanced
+              }
+            }
+
+            // Performance button
+            Rectangle {
+              Layout.fillWidth: true
+              Layout.preferredHeight: 36
+              radius: Style.radiusS
+              color: PowerProfileService.profile === 0 ? Color.mPrimary : (perfMouseArea.containsMouse ? Qt.alpha(Color.mPrimary, 0.2) : "transparent")
+              border.color: PowerProfileService.profile === 0 ? Color.mPrimary : Color.mOutline
+              border.width: 1
+
+              ColumnLayout {
+                anchors.centerIn: parent
+                spacing: -2
+
+                Text {
+                  text: "󱐋"
+                  color: PowerProfileService.profile === 0 ? Color.mOnPrimary : Color.mOnSurface
+                  font.family: Style.fontFamily
+                  font.pixelSize: Style.fontSizeL
+                  Layout.alignment: Qt.AlignHCenter
+                }
+
+                Text {
+                  text: "Perf"
+                  color: PowerProfileService.profile === 0 ? Color.mOnPrimary : Color.mOnSurfaceVariant
+                  font.family: Style.fontFamily
+                  font.pixelSize: 8
+                  Layout.alignment: Qt.AlignHCenter
+                }
+              }
+
+              MouseArea {
+                id: perfMouseArea
+                anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+                onClicked: PowerProfileService.setProfile(0)  // Performance
               }
             }
           }

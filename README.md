@@ -23,13 +23,13 @@ The name combines **Niri** + **Gruv**box, and references the Sanskrit word **न
 - 🖥️ **Workspace indicators** with Nerd Font icons and smooth animations
 - 📊 **System Monitor** showing CPU%, RAM%, temperature, and load average with threshold alerts
 - 🖼️ **Wallpaper widget** click to set random wallpaper via swaybg
-- 🔋 **Battery widget** with hover effects, themed expansion, and detailed BatteryPanel popup
+- 🔋 **Battery widget** with hover effects, themed expansion, BatteryPanel with power profile controls
 - 🎥 **Screen Recorder** with recording status, hover expansion, and direct launch
 - 📶 **WiFi widget** with SSID display on hover, click opens NetworkPanel
 - 🔵 **Bluetooth widget** with connected device display, click opens NetworkPanel
 - 🎵 **Media widget** showing current track (Artist - Title), with MediaPanel popup for full controls
 - 🎼 **Cava Visualizer** integrated audio spectrum display
-- 🔊 **Volume widget** with VolumePanel popup, scroll to adjust, right-click mixer
+- 🔊 **Volume widget** with VolumePanel popup, audio device switching, scroll to adjust
 - ☀️ **Brightness widget** with BrightnessPanel popup including Night Light controls
 - 🌙 **Night Light widget** with wlsunset toggle (off → auto → forced states)
 - 🕐 **Clock widget** with ClockPanel popup containing calendar and timer
@@ -39,6 +39,7 @@ The name combines **Niri** + **Gruv**box, and references the Sanskrit word **न
 - 🚀 **Minimalist Launcher** with app search + system menu (Tab to switch modes)
 - 🖱️ **Click-outside-to-close** panels - click anywhere outside or press ESC
 - 📺 **On-Screen Display (OSD)** visual feedback for volume/brightness/media changes
+- ⚡ **Power Profiles** switch between Performance/Balanced/Power Saver modes
 
 ## 📚 Documentation
 
@@ -57,6 +58,7 @@ For detailed guides on installation, configuration, and development, please refe
 | [quickshell](https://quickshell.outfoxxed.me/) | Qt/QML shell framework |
 | [niri](https://github.com/YaLTeR/niri) | Scrollable-tiling Wayland compositor |
 | JetBrainsMono Nerd Font | Icon and text rendering |
+| power-profiles-daemon | (Optional) Power profile switching |
 
 ## 🚀 Installation
 
@@ -142,9 +144,11 @@ niruv/
     │   └── BrightnessService.qml # Brightness control via brightnessctl
     ├── Media/
     │   ├── CavaService.qml       # Cava audio visualizer service
-    │   └── AudioService.qml      # PipeWire audio volume/mute control
+    │   └── AudioService.qml      # PipeWire audio volume/mute + device switching
     ├── Networking/
     │   └── BluetoothService.qml # Bluetooth battery support
+    ├── Power/
+    │   └── PowerProfileService.qml # Performance/Balanced/Power Saver modes
     ├── System/
     │   ├── ApplicationsService.qml  # App listing + search
     │   ├── MenuService.qml          # System menu categories + actions

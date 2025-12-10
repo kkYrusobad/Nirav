@@ -282,6 +282,107 @@ PopupWindow {
           }
         }
       }
+
+      // Output Devices section
+      Rectangle {
+        Layout.fillWidth: true
+        Layout.preferredHeight: devicesColumn.implicitHeight + Style.marginM * 2
+        radius: Style.radiusM
+        color: Color.mSurfaceVariant
+        border.color: Color.mOutline
+        border.width: Style.borderS
+        visible: AudioService.sinks && AudioService.sinks.length > 1
+
+        ColumnLayout {
+          id: devicesColumn
+          anchors.fill: parent
+          anchors.margins: Style.marginM
+          spacing: Style.marginS
+
+          // Section header
+          RowLayout {
+            Layout.fillWidth: true
+            spacing: Style.marginS
+
+            Text {
+              text: "󰓃"
+              color: Color.mPrimary
+              font.family: Style.fontFamily
+              font.pixelSize: Style.fontSizeL
+            }
+
+            Text {
+              text: "Output Device"
+              color: Color.mOnSurface
+              font.family: Style.fontFamily
+              font.pixelSize: Style.fontSizeS
+              font.weight: Style.fontWeightMedium
+              Layout.fillWidth: true
+            }
+          }
+
+          // Device list
+          Repeater {
+            model: AudioService.sinks
+
+            Rectangle {
+              required property var modelData
+              required property int index
+
+              Layout.fillWidth: true
+              Layout.preferredHeight: 32
+              radius: Style.radiusS
+              color: deviceMouseArea.containsMouse ? Qt.alpha(Color.mPrimary, 0.15) : "transparent"
+
+              RowLayout {
+                anchors.fill: parent
+                anchors.leftMargin: Style.marginS
+                anchors.rightMargin: Style.marginS
+                spacing: Style.marginS
+
+                // Radio indicator
+                Rectangle {
+                  Layout.preferredWidth: 16
+                  Layout.preferredHeight: 16
+                  radius: 8
+                  color: "transparent"
+                  border.color: AudioService.sink?.id === modelData.id ? Color.mPrimary : Color.mOnSurfaceVariant
+                  border.width: 2
+
+                  Rectangle {
+                    anchors.centerIn: parent
+                    width: 8
+                    height: 8
+                    radius: 4
+                    color: Color.mPrimary
+                    visible: AudioService.sink?.id === modelData.id
+                  }
+                }
+
+                // Device name
+                Text {
+                  text: modelData.description || modelData.name || "Unknown Device"
+                  color: Color.mOnSurface
+                  font.family: Style.fontFamily
+                  font.pixelSize: Style.fontSizeS
+                  elide: Text.ElideRight
+                  Layout.fillWidth: true
+                }
+              }
+
+              MouseArea {
+                id: deviceMouseArea
+                anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+                onClicked: {
+                  AudioService.setAudioSink(modelData);
+                }
+              }
+            }
+          }
+        }
+      }
     }
 
     // Animation

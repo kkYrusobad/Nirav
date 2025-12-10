@@ -49,9 +49,42 @@ Singleton {
   // Internal state for feedback loop prevention
   property bool isSettingVolume: false
 
+  // List of available audio output devices (sinks)
+  readonly property var sinks: {
+    if (!Pipewire.ready) return [];
+    let devices = [];
+    let nodes = Pipewire.nodes.values;
+    for (let i = 0; i < nodes.length; i++) {
+      let node = nodes[i];
+      if (node && !node.isStream && node.isSink) {
+        devices.push(node);
+      }
+    }
+    return devices;
+  }
+
   // Bind sink to ensure properties are available
   PwObjectTracker {
     objects: root.sink ? [root.sink] : []
+  }
+
+  // Track all sinks to ensure their properties are available
+  PwObjectTracker {
+    objects: root.sinks
+  }
+
+  // Device switching function
+  function setAudioSink(newSink) {
+    if (!Pipewire.ready) {
+      Logger.w("AudioService", "Pipewire not ready");
+      return;
+    }
+    if (!newSink) {
+      Logger.w("AudioService", "Invalid sink");
+      return;
+    }
+    Logger.d("AudioService", "Switching to sink: " + newSink.description);
+    Pipewire.preferredDefaultAudioSink = newSink;
   }
 
   // Volume control functions

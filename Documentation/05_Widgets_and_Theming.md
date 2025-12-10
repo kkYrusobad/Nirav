@@ -37,7 +37,11 @@ The `Style` singleton defines standard dimensions and animations:
 The battery widget is more than just a percentage indicator.
 
 - **Hover Effect**: Expands to show a colored background (customizable theme color) and percentage text.
-- **Floating Window**: Right-click the icon to launch `battop` in a centered, floating terminal window.
+- **Left-Click**: Opens **BatteryPanel** with:
+  - Battery percentage, time remaining, power draw, health
+  - **Power Profile** buttons (Power Saver / Balanced / Performance)
+  - Connected Bluetooth devices with battery levels
+  - Button to open battery monitor
 - **Bluetooth**: Automatically detects and displays battery levels for connected Bluetooth devices.
 
 ### Screen Recorder Widget
@@ -111,11 +115,12 @@ Audio volume control with PipeWire integration.
 - **Icon**: Changes based on volume level (muted, low, medium, high)
 - **Hover Expansion**: Percentage text expands on hover after 500ms delay
 - **Scroll Control**: Scroll up/down to adjust volume
-- **Left-Click**: Opens **VolumePanel** with slider and mute toggle
+- **Left-Click**: Opens **VolumePanel** with slider and device switching
 - **Right-Click**: Opens external mixer (pwvucontrol/pavucontrol)
 - **VolumePanel Features**:
   - Volume slider with visual feedback
   - Mute toggle in header
+  - **Output Device switching** (when multiple devices available)
   - Quick button to open audio mixer
 - **Service**: Uses `Services/Media/AudioService.qml` with Quickshell.Services.Pipewire
 
@@ -164,3 +169,15 @@ All popup panels share consistent behavior:
 - **Auto-Close on New Panel**: Opening a new panel automatically closes any open panel
 - **Smooth Animations**: Scale and fade animations on open/close
 - **PanelState Singleton**: Centralized tracking via `Commons/PanelState.qml`
+
+## 📺 On-Screen Display (OSD)
+
+Niruv displays visual feedback for system changes:
+
+- **Volume OSD**: Appears when volume changes (shows icon + progress bar + percentage)
+- **Brightness OSD**: Appears when brightness changes
+- **Media OSD**: Appears when track changes (shows artist + title)
+- **Position**: Top-right corner, below the bar
+- **Auto-Hide**: Fades out after 2 seconds
+- **Styling**: Gruvbox theme with smooth scale and fade animations
+- **Muted State**: Volume OSD shows red progress bar when muted
