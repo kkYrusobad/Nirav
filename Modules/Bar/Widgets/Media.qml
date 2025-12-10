@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.Mpris
 import qs.Commons
+import qs.Modules.Panels.MediaPanel
 
 /*
  * Niruv Media Widget - Shows current playing media (Noctalia-style)
@@ -55,9 +56,15 @@ Item {
     return "";                            // play (click to play)
   }
 
-  // --- Dimensions ---
   implicitWidth: capsule.width
   implicitHeight: Style.barHeight
+
+  // Media Panel
+  MediaPanel {
+    id: mediaPanel
+    anchorItem: capsule
+    screen: root.screen
+  }
 
   // Always visible
   visible: true
@@ -147,19 +154,16 @@ Item {
       acceptedButtons: Qt.LeftButton | Qt.RightButton
 
       onClicked: (mouse) => {
-        if (!root.hasPlayer || !root.currentPlayer) return;
-        
         if (mouse.button === Qt.LeftButton) {
-          // Play/pause
+          // Open media panel
+          mediaPanel.toggle();
+        } else if (mouse.button === Qt.RightButton) {
+          // Play/pause on right-click
+          if (!root.hasPlayer || !root.currentPlayer) return;
           if (root.isPlaying) {
             root.currentPlayer.pause();
           } else {
             root.currentPlayer.play();
-          }
-        } else if (mouse.button === Qt.RightButton) {
-          // Next track
-          if (root.currentPlayer.canGoNext) {
-            root.currentPlayer.next();
           }
         }
       }

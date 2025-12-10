@@ -88,6 +88,46 @@ ShellRoot {
     }
   }
 
+  // Panel backdrop overlay (transparent, click-outside-to-close)
+  // Appears on each screen when a popup panel is open
+  Variants {
+    model: Quickshell.screens
+
+    PanelWindow {
+      id: panelBackdrop
+      required property ShellScreen modelData
+
+      screen: modelData
+
+      // Cover the entire screen (except bar)
+      anchors {
+        top: true
+        bottom: true
+        left: true
+        right: true
+      }
+
+      // Layer shell properties - sits between bar and popups
+      WlrLayershell.namespace: "niruv-panel-backdrop"
+      WlrLayershell.layer: WlrLayer.Top
+      // No exclusive zone - doesn't reserve space
+
+      // Fully transparent - just catches clicks
+      color: "transparent"
+      
+      // Only visible when a panel is open
+      visible: PanelState.hasOpenPanel
+
+      // Catch clicks anywhere on this overlay to close panels
+      MouseArea {
+        anchors.fill: parent
+        onClicked: {
+          PanelState.closeOpenPanel();
+        }
+      }
+    }
+  }
+
   // Launcher overlay (on primary screen)
   PanelWindow {
     id: launcherWindow

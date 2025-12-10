@@ -23,15 +23,18 @@ The name combines **Niri** + **Gruv**box, and references the Sanskrit word **न
 - 🖥️ **Workspace indicators** with Nerd Font icons and smooth animations
 - 📊 **System Monitor** showing CPU%, RAM%, temperature, and load average with threshold alerts
 - 🖼️ **Wallpaper widget** click to set random wallpaper via swaybg
-- 🔋 **Battery widget** with hover effects, themed expansion, and right-click to open `battop` in a floating window
+- 🔋 **Battery widget** with hover effects, themed expansion, and detailed BatteryPanel popup
 - 🎥 **Screen Recorder** with recording status, hover expansion, and direct launch
 - 📶 **WiFi widget** with SSID display on hover, click to open `impala` TUI
 - 🔵 **Bluetooth widget** with connected device display, click to open `bluetui`
-- 🎵 **Media widget** showing current track (Artist - Title), play/pause/next controls
+- 🎵 **Media widget** showing current track (Artist - Title), with MediaPanel popup for full controls
 - 🎼 **Cava Visualizer** integrated audio spectrum display
-- 🕐 **Live clock** display (centered with logo icons)
+- 🕐 **Clock widget** with ClockPanel popup containing calendar and timer
+- ⏱️ **Timer/Stopwatch** with Pomodoro presets, customizable alarm sound
+- 📅 **Calendar Cards** displaying current date and month grid
 - ⌨️ **JetBrainsMono Nerd Font** throughout
 - 🚀 **Minimalist Launcher** with app search + system menu (Tab to switch modes)
+- 🖱️ **Click-outside-to-close** panels - click anywhere outside or press ESC
 
 ## 📚 Documentation
 
@@ -92,8 +95,9 @@ niruv/
 │   ├── Color.qml              # Gruvbox color palette
 │   ├── Style.qml              # UI design tokens
 │   ├── Logger.qml             # Debug logging
-│   ├── Time.qml               # Clock utilities
-│   └── Settings.qml           # Configuration
+│   ├── Time.qml               # Clock + Timer utilities
+│   ├── Settings.qml           # Configuration
+│   └── PanelState.qml         # Panel visibility tracking (click-outside-to-close)
 ├── Modules/
 │   ├── Bar/                   # Top bar module
 │   │   ├── Bar.qml            # Main bar component
@@ -107,6 +111,15 @@ niruv/
 │   │       ├── Bluetooth.qml  # Bluetooth status widget
 │   │       ├── Media.qml      # Media player widget
 │   │       └── Visualizer.qml # Cava audio visualizer
+│   ├── Cards/                 # Reusable card components
+│   │   ├── CalendarHeaderCard.qml  # Current date display
+│   │   ├── CalendarMonthCard.qml   # Month grid calendar
+│   │   └── TimerCard.qml      # Timer/Stopwatch with Pomodoro presets
+│   ├── Panels/                # Popup panels
+│   │   ├── ClockPanel/        # Calendar + Timer panel
+│   │   ├── BatteryPanel/      # Detailed battery info
+│   │   ├── MediaPanel/        # Full media controls
+│   │   └── SystemMonitorPanel/ # Detailed system stats
 │   └── Launcher/              # App Launcher + System Menu
 │       └── Launcher.qml       # Minimalist launcher UI
 └── Services/

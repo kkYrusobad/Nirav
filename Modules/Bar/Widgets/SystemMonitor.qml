@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 import qs.Commons
 import qs.Services.System
+import qs.Modules.Panels.SystemMonitorPanel
 
 /*
  * Niruv SystemMonitor Widget - Compact system stats display
@@ -19,6 +20,13 @@ Item {
   // Dimensions
   implicitWidth: contentRow.width + Style.marginS * 2
   implicitHeight: Style.barHeight
+
+  // System Monitor Panel
+  SystemMonitorPanel {
+    id: systemMonitorPanel
+    anchorItem: root
+    screen: root.screen
+  }
 
   // Capsule background (Noctalia-style like Media widget)
   Rectangle {
@@ -176,8 +184,13 @@ Item {
     id: mouseArea
     anchors.fill: parent
     hoverEnabled: true
+    cursorShape: Qt.PointingHandCursor
 
     onEntered: isHovered = true
     onExited: isHovered = false
+
+    onClicked: {
+      systemMonitorPanel.toggle();
+    }
   }
 }

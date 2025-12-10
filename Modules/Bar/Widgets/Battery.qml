@@ -7,6 +7,7 @@ import qs.Commons
 import qs.Services.Hardware
 import qs.Services.Networking
 import qs.Services.UI
+import qs.Modules.Panels.BatteryPanel
 
 /*
  * Niruv Battery Widget v2 - Enhanced battery status display
@@ -128,6 +129,13 @@ Item {
     return lines.join("\n");
   }
 
+  // --- Battery Panel ---
+  BatteryPanel {
+    id: batteryPanel
+    anchorItem: root
+    screen: root.screen
+  }
+
   // --- Dimensions ---
   implicitWidth: batteryRow.width
   implicitHeight: Style.barHeight
@@ -167,7 +175,6 @@ Item {
       color: {
         if (!initComplete) return Color.transparent;
         if (mouseArea.containsMouse) return Color.mOnPrimary;
-        if (charging) return Color.mPrimary;
         if (isLowBattery) return Color.mError;
         return Color.mOnSurface;
       }
@@ -206,7 +213,6 @@ Item {
         color: {
           if (!initComplete) return Color.transparent;
           if (mouseArea.containsMouse) return Color.mOnPrimary;
-          if (charging) return Color.mPrimary;
           if (isLowBattery) return Color.mError;
           return Color.mOnSurface;
         }
@@ -252,11 +258,8 @@ Item {
       if (mouse.button === Qt.RightButton) {
         battopProcess.running = true;
       } else {
-        // Toggle tooltip on click
-        tooltipPopup.visible = !tooltipPopup.visible;
-        if (tooltipPopup.visible) {
-          tooltipTimeout.restart();
-        }
+        // Open battery panel
+        batteryPanel.toggle();
       }
     }
   }

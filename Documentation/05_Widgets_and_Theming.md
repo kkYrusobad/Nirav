@@ -58,7 +58,30 @@ Displays Niri workspaces with smooth animations.
 
 ### Clock Widget
 
-A simple, elegant clock displaying the current time and date. Clicking it can be configured to open a calendar or other utility.
+A simple, elegant clock displaying the current time and date. Clicking it opens the **ClockPanel**.
+
+- **ClockPanel**: Contains calendar cards and timer functionality
+- **CalendarHeaderCard**: Displays the current day name, date, and month/year
+- **CalendarMonthCard**: Full month grid with current day highlighted
+- **TimerCard**: Timer/Stopwatch with Pomodoro presets
+
+### Timer/Stopwatch (TimerCard)
+
+Niruv includes a built-in timer accessible from the ClockPanel.
+
+- **Countdown Mode**: Set custom duration and count down to zero
+- **Stopwatch Mode**: Count up from zero (click stopwatch icon)
+- **Pomodoro Presets**: Quick-start buttons for common intervals:
+  - 25 minutes (Work session)
+  - 5 minutes (Short break)
+  - 15 minutes (Long break)
+- **Customizable Alarm**: Change the sound by editing `Commons/Time.qml`:
+
+  ```qml
+  command: ["sh", "-c", "for i in 1 2 3; do paplay /path/to/your/sound.ogg; sleep 0.3; done"]
+  ```
+
+- **Bar Indicator**: Timer countdown appears in the center bar when running
 
 ### SystemMonitor Widget
 
@@ -69,6 +92,7 @@ Displays real-time system statistics in a compact capsule format.
 - **CPU Temperature**: Displays in degrees, turns red when >80°C
 - **Load Average**: Shows 1-minute system load
 - **Hover Effect**: Capsule background turns blue on hover
+- **Click Action**: Opens **SystemMonitorPanel** with detailed stats and progress bars
 - **Service**: Uses `SystemStatService.qml` to poll `/proc/` filesystem every 3 seconds
 
 ### Wallpaper Widget
@@ -79,3 +103,13 @@ A quick wallpaper changer widget.
 - **Supported Formats**: JPG, JPEG, PNG, WebP
 - **Hover Effect**: Background pill appears on hover
 - **Script**: Uses `oNIgiRI/bin/niri-random-wallpaper` for reliable process handling
+
+## 🖱️ Panel Behavior
+
+All popup panels share consistent behavior:
+
+- **Click-Outside-to-Close**: Click anywhere outside the panel to close it
+- **ESC Key**: Press Escape to close the panel
+- **Auto-Close on New Panel**: Opening a new panel automatically closes any open panel
+- **Smooth Animations**: Scale and fade animations on open/close
+- **PanelState Singleton**: Centralized tracking via `Commons/PanelState.qml`

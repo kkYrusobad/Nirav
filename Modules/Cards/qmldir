@@ -1,0 +1,4 @@
+module qs.Modules.Cards
+CalendarHeaderCard 1.0 CalendarHeaderCard.qml
+CalendarMonthCard 1.0 CalendarMonthCard.qml
+TimerCard 1.0 TimerCard.qml

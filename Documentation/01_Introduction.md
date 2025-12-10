@@ -8,15 +8,20 @@ The name **Niruv** is a portmanteau of **Niri** and **Gruv**box, and also refere
 
 - **Minimalist Design**: A clean, distraction-free interface that stays out of your way.
 - **Gruvbox Material Theme**: Built from the ground up with the warm, retro-inspired Gruvbox Material Dark color scheme.
-- **Responsive Bar**: A modular top bar containing essential widgets like workspaces, clock, and battery.
+- **Responsive Bar**: A modular top bar containing essential widgets like workspaces, clock, media, and battery.
 - **Interactive Widgets**:
   - **Workspaces**: Smoothly animated indicators for Niri workspaces.
-  - **Battery**: Detailed status with hover expansion, Bluetooth device support, and integrated `battop` floating window.
+  - **Clock**: Click to open ClockPanel with calendar and timer/stopwatch.
+  - **Battery**: Detailed status with hover expansion and BatteryPanel popup.
+  - **Media**: Track info with MediaPanel for full playback controls.
+  - **System Monitor**: CPU/RAM/Temp/Load with SystemMonitorPanel for detailed stats.
+- **Timer/Stopwatch**: Built-in timer with Pomodoro presets (25m, 5m, 15m) and customizable alarm sounds.
+- **Click-Outside-to-Close**: All popup panels close when clicking outside or pressing ESC.
 - **Floating Window Support**: Seamless integration with Niri's window rules for floating TUI applications.
 
 ## 🖼️ Gallery
 
-*(Placeholder for Screenshots)*
+Screenshots coming soon.
 
 ## 🚀 Getting Started
 

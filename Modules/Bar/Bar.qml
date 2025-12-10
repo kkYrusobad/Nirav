@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 import qs.Commons
 import qs.Modules.Bar.Widgets
+import qs.Modules.Panels.ClockPanel
 
 /*
  * Niruv Bar - Main bar component with workspaces and clock
@@ -25,7 +26,7 @@ Item {
   Item {
     id: leftLogoContainer
     anchors.left: parent.left
-    anchors.leftMargin: Style.marginM
+    anchors.leftMargin: Style.marginM - 6
     anchors.verticalCenter: parent.verticalCenter
     //width: leftLogoCapsule.width
     width: 30
@@ -81,35 +82,71 @@ Item {
     }
   }
 
-  // Clock (absolutely centered, click to open launcher)
+  // Clock Panel (popup with calendar and timer)
+  ClockPanel {
+    id: clockPanel
+    anchorItem: clockArea
+    screen: root.screen
+  }
+
+  // Clock (absolutely centered, click to open ClockPanel)
   MouseArea {
     id: clockArea
     anchors.centerIn: parent
-    width: clockTextCenter.width + Style.marginM * 2
+    width: clockContent.width + Style.marginM * 2
     height: parent.height
     cursorShape: Qt.PointingHandCursor
     z: 10
 
     onClicked: {
-      // Access launcher through shellRoot
-      if (typeof shellRoot !== 'undefined' && shellRoot.launcher) {
-        shellRoot.launcher.toggle();
-      }
+      clockPanel.toggle();
     }
 
-    Text {
-      id: clockTextCenter
+    Row {
+      id: clockContent
       anchors.centerIn: parent
-      color: Color.mOnSurface
-      font.family: Style.fontFamily
-      font.pixelSize: Style.fontSizeM
-      font.weight: Style.fontWeightSemiBold
+      spacing: Style.marginS
 
-      text: {
-        var now = Time.now;
-        var date = now.toLocaleDateString(Qt.locale(), "ddd, MMM d");
-        var time = now.toLocaleTimeString(Qt.locale(), "hh:mm");
-        return date + "  " + time;
+      // Timer indicator (pulsing dot when timer is running)
+      Rectangle {
+        visible: Time.timerRunning
+        width: 6
+        height: 6
+        radius: 3
+        color: Color.mPrimary
+        anchors.verticalCenter: parent.verticalCenter
+
+        SequentialAnimation on opacity {
+          running: Time.timerRunning
+          loops: Animation.Infinite
+          NumberAnimation { to: 0.3; duration: 500 }
+          NumberAnimation { to: 1.0; duration: 500 }
+        }
+      }
+
+      Text {
+        id: clockTextCenter
+        anchors.verticalCenter: parent.verticalCenter
+        color: Time.timerRunning ? Color.mPrimary : Color.mOnSurface
+        font.family: Style.fontFamily
+        font.pixelSize: Style.fontSizeM
+        font.weight: Style.fontWeightSemiBold
+
+        text: {
+          // Show timer countdown when running
+          if (Time.timerRunning) {
+            if (Time.timerStopwatchMode) {
+              return "󱎫 " + Time.formatTimerDisplay(Time.timerElapsedSeconds, false);
+            } else {
+              return "󱎫 " + Time.formatTimerDisplay(Time.timerRemainingSeconds, false);
+            }
+          }
+          // Normal clock display
+          var now = Time.now;
+          var date = now.toLocaleDateString(Qt.locale(), "ddd, MMM d");
+          var time = now.toLocaleTimeString(Qt.locale(), "hh:mm");
+          return date + "  " + time;
+        }
       }
     }
   }
@@ -138,7 +175,7 @@ Item {
   // Bar content layout
   RowLayout {
     anchors.fill: parent
-    anchors.leftMargin: 50
+    anchors.leftMargin: 42
     anchors.rightMargin: 48
     spacing: Style.marginM
 

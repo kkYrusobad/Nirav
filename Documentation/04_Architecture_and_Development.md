@@ -9,10 +9,12 @@ The project is organized into modular components:
 ```
 Niruv/
 ├── shell.qml                  # Main Entry Point
-├── Commons/                   # Core Singletons (Colors, Style, Settings)
+├── Commons/                   # Core Singletons (Colors, Style, Settings, PanelState)
 ├── Modules/                   # UI Components
-│   ├── Bar/                   # Top/Bottom Bar
-│   ├── Dock/                  # Application Dock
+│   ├── Bar/                   # Top/Bottom Bar with Widgets
+│   ├── Cards/                 # Reusable card components
+│   ├── Panels/                # Popup panels (ClockPanel, BatteryPanel, etc.)
+│   ├── Launcher/              # Application launcher
 │   └── ...
 ├── Services/                  # Background Logic
 │   ├── Compositor/            # Niri Integration
@@ -31,6 +33,8 @@ Niruv uses global singletons for shared state and utilities:
 - **`Style`**: Contains UI tokens like font sizes, margins, and animation durations.
 - **`Settings`**: Manages user configuration.
 - **`Logger`**: Provides standardized logging (`Logger.i`, `Logger.d`, `Logger.e`).
+- **`Time`**: Clock utilities and timer functionality with alarm sound.
+- **`PanelState`**: Tracks open panels for click-outside-to-close functionality.
 
 ### Services (`Services/`)
 
@@ -44,6 +48,23 @@ Key services include:
 - **BluetoothService**: Bluetooth device battery monitoring
 - **ApplicationsService**: Desktop app listing and fuzzy search
 - **MenuService**: System menu categories and actions
+
+### Panels (`Modules/Panels/`)
+
+Popup panels provide detailed information when clicking on bar widgets:
+
+- **ClockPanel**: Calendar cards and timer/stopwatch
+- **BatteryPanel**: Detailed battery statistics
+- **MediaPanel**: Full media player controls with album art
+- **SystemMonitorPanel**: Detailed CPU/RAM/Temp/Load with progress bars
+
+### Cards (`Modules/Cards/`)
+
+Reusable card components used within panels:
+
+- **CalendarHeaderCard**: Current day, date, and month display
+- **CalendarMonthCard**: Month grid calendar with current day highlighted
+- **TimerCard**: Timer/Stopwatch with Pomodoro presets
 
 ## 🤝 Contributing
 
@@ -62,4 +83,8 @@ Key services include:
 
 ### Debugging
 
-Run the shell with `NOCTALIA_DEBUG=1` to see debug output from `Logger.d()` calls.
+Run the shell with `NIRUV_DEBUG=1` to see debug output from `Logger.d()` calls.
+
+```bash
+NIRUV_DEBUG=1 qs -c niruv
+```
