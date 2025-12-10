@@ -25,10 +25,13 @@ The name combines **Niri** + **Gruv**box, and references the Sanskrit word **न
 - 🖼️ **Wallpaper widget** click to set random wallpaper via swaybg
 - 🔋 **Battery widget** with hover effects, themed expansion, and detailed BatteryPanel popup
 - 🎥 **Screen Recorder** with recording status, hover expansion, and direct launch
-- 📶 **WiFi widget** with SSID display on hover, click to open `impala` TUI
-- 🔵 **Bluetooth widget** with connected device display, click to open `bluetui`
+- 📶 **WiFi widget** with SSID display on hover, click opens NetworkPanel
+- 🔵 **Bluetooth widget** with connected device display, click opens NetworkPanel
 - 🎵 **Media widget** showing current track (Artist - Title), with MediaPanel popup for full controls
 - 🎼 **Cava Visualizer** integrated audio spectrum display
+- 🔊 **Volume widget** with VolumePanel popup, scroll to adjust, right-click mixer
+- ☀️ **Brightness widget** with BrightnessPanel popup including Night Light controls
+- 🌙 **Night Light widget** with wlsunset toggle (off → auto → forced states)
 - 🕐 **Clock widget** with ClockPanel popup containing calendar and timer
 - ⏱️ **Timer/Stopwatch** with Pomodoro presets, customizable alarm sound
 - 📅 **Calendar Cards** displaying current date and month grid
@@ -110,7 +113,10 @@ niruv/
 │   │       ├── WiFi.qml       # WiFi status widget
 │   │       ├── Bluetooth.qml  # Bluetooth status widget
 │   │       ├── Media.qml      # Media player widget
-│   │       └── Visualizer.qml # Cava audio visualizer
+│   │       ├── Visualizer.qml # Cava audio visualizer
+│   │       ├── Volume.qml     # Volume control widget
+│   │       ├── Brightness.qml # Brightness control widget
+│   │       └── NightLight.qml # Night light toggle widget
 │   ├── Cards/                 # Reusable card components
 │   │   ├── CalendarHeaderCard.qml  # Current date display
 │   │   ├── CalendarMonthCard.qml   # Month grid calendar
@@ -119,6 +125,9 @@ niruv/
 │   │   ├── ClockPanel/        # Calendar + Timer panel
 │   │   ├── BatteryPanel/      # Detailed battery info
 │   │   ├── MediaPanel/        # Full media controls
+│   │   ├── VolumePanel/       # Volume slider + mute toggle
+│   │   ├── BrightnessPanel/   # Brightness slider + Night Light
+│   │   ├── NetworkPanel/      # WiFi + Bluetooth controls
 │   │   └── SystemMonitorPanel/ # Detailed system stats
 │   └── Launcher/              # App Launcher + System Menu
 │       └── Launcher.qml       # Minimalist launcher UI
@@ -126,15 +135,18 @@ niruv/
     ├── Compositor/
     │   └── NiriService.qml    # Niri IPC integration
     ├── Hardware/
-    │   └── BatteryService.qml # Battery icon logic
+    │   ├── BatteryService.qml    # Battery icon logic
+    │   └── BrightnessService.qml # Brightness control via brightnessctl
     ├── Media/
-    │   └── CavaService.qml    # Cava audio visualizer service
+    │   ├── CavaService.qml       # Cava audio visualizer service
+    │   └── AudioService.qml      # PipeWire audio volume/mute control
     ├── Networking/
     │   └── BluetoothService.qml # Bluetooth battery support
     ├── System/
-    │   ├── ApplicationsService.qml # App listing + search
-    │   ├── MenuService.qml    # System menu categories + actions
-    │   └── SystemStatService.qml # CPU/RAM/Temp/Load stats
+    │   ├── ApplicationsService.qml  # App listing + search
+    │   ├── MenuService.qml          # System menu categories + actions
+    │   ├── SystemStatService.qml    # CPU/RAM/Temp/Load stats
+    │   └── NightLightService.qml    # wlsunset night light control
     └── UI/
         └── ToastService.qml   # Desktop notifications
 ```

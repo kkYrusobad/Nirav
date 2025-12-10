@@ -4,6 +4,7 @@ import Quickshell
 import qs.Commons
 import qs.Modules.Bar.Widgets
 import qs.Modules.Panels.ClockPanel
+import qs.Modules.Panels.NetworkPanel
 
 /*
  * Niruv Bar - Main bar component with workspaces and clock
@@ -86,6 +87,13 @@ Item {
   ClockPanel {
     id: clockPanel
     anchorItem: clockArea
+    screen: root.screen
+  }
+
+  // Shared Network Panel (for WiFi and Bluetooth widgets)
+  NetworkPanel {
+    id: networkPanel
+    anchorItem: wifiWidget
     screen: root.screen
   }
 
@@ -226,19 +234,40 @@ Item {
 
         // WiFi widget
         WiFi {
+          id: wifiWidget
           anchors.verticalCenter: parent.verticalCenter
           screen: root.screen
+          networkPanel: networkPanel
         }
 
         // Bluetooth widget
         Bluetooth {
           anchors.verticalCenter: parent.verticalCenter
           screen: root.screen
+          networkPanel: networkPanel
         }
 
         // Screen Recorder
         ScreenRecorder {
           anchors.verticalCenter: parent.verticalCenter
+        }
+
+        // Volume widget
+        Volume {
+          anchors.verticalCenter: parent.verticalCenter
+          screen: root.screen
+        }
+
+        // Brightness widget
+        Brightness {
+          anchors.verticalCenter: parent.verticalCenter
+          screen: root.screen
+        }
+
+        // Night Light widget
+        NightLight {
+          anchors.verticalCenter: parent.verticalCenter
+          screen: root.screen
         }
 
         // Battery widget

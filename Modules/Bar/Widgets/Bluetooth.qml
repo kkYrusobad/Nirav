@@ -3,15 +3,18 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 import qs.Commons
+import qs.Modules.Panels.NetworkPanel
 
 /*
- * Niruv Bluetooth Widget - Shows bluetooth status, opens bluetui TUI on click
- * Text expands to the LEFT of the icon on hover
+ * Niruv Bluetooth Widget - Shows bluetooth status, click to open NetworkPanel
  */
 Item {
   id: root
 
   property ShellScreen screen: null
+
+  // Shared network panel (can be opened by both WiFi and Bluetooth widgets)
+  property NetworkPanel networkPanel: null
 
   // --- Bluetooth State ---
   // States: "connected", "on", "off"
@@ -191,7 +194,12 @@ Item {
     }
 
     onClicked: {
-      btProcess.running = true;
+      if (networkPanel) {
+        networkPanel.toggle();
+      } else {
+        // Fallback: open bluetui directly
+        btProcess.running = true;
+      }
     }
   }
 

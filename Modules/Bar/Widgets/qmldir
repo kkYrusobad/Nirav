@@ -8,3 +8,6 @@ Media 1.0 Media.qml
 Visualizer 1.0 Visualizer.qml
 SystemMonitor 1.0 SystemMonitor.qml
 Wallpaper 1.0 Wallpaper.qml
+Volume 1.0 Volume.qml
+Brightness 1.0 Brightness.qml
+NightLight 1.0 NightLight.qml

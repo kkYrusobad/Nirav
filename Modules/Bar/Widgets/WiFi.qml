@@ -3,14 +3,18 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 import qs.Commons
+import qs.Modules.Panels.NetworkPanel
 
 /*
- * Niruv WiFi Widget - Shows network status, opens impala TUI on click
+ * Niruv WiFi Widget - Shows network status, click to open NetworkPanel
  */
 Item {
   id: root
 
   property ShellScreen screen: null
+
+  // Shared network panel (can be opened by both WiFi and Bluetooth widgets)
+  property NetworkPanel networkPanel: null
 
   // --- WiFi State ---
   // States: "connected", "disconnected", "off"
@@ -193,7 +197,12 @@ Item {
     }
 
     onClicked: {
-      wifiProcess.running = true;
+      if (networkPanel) {
+        networkPanel.toggle();
+      } else {
+        // Fallback: open impala directly
+        wifiProcess.running = true;
+      }
     }
   }
 

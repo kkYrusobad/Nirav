@@ -104,6 +104,57 @@ A quick wallpaper changer widget.
 - **Hover Effect**: Background pill appears on hover
 - **Script**: Uses `oNIgiRI/bin/niri-random-wallpaper` for reliable process handling
 
+### Volume Widget
+
+Audio volume control with PipeWire integration.
+
+- **Icon**: Changes based on volume level (muted, low, medium, high)
+- **Hover Expansion**: Percentage text expands on hover after 500ms delay
+- **Scroll Control**: Scroll up/down to adjust volume
+- **Left-Click**: Opens **VolumePanel** with slider and mute toggle
+- **Right-Click**: Opens external mixer (pwvucontrol/pavucontrol)
+- **VolumePanel Features**:
+  - Volume slider with visual feedback
+  - Mute toggle in header
+  - Quick button to open audio mixer
+- **Service**: Uses `Services/Media/AudioService.qml` with Quickshell.Services.Pipewire
+
+### Brightness Widget
+
+Screen brightness control using brightnessctl.
+
+- **Icon**: Changes based on brightness level (off, low, high)
+- **Hover Expansion**: Percentage text expands on hover
+- **Scroll Control**: Scroll up/down to adjust brightness (5% steps)
+- **Left-Click**: Opens **BrightnessPanel** with slider and Night Light controls
+- **Right-Click**: Set to 100%
+- **BrightnessPanel Features**:
+  - Brightness slider with visual feedback
+  - Night Light section with Off/Auto/On mode buttons
+- **Auto-Hide**: Widget only appears if brightnessctl is available
+- **Service**: Uses `Services/Hardware/BrightnessService.qml`
+
+### WiFi & Bluetooth Widgets
+
+Network connectivity widgets with shared **NetworkPanel**.
+
+- **WiFi Widget**: Shows connection status and SSID on hover
+- **Bluetooth Widget**: Shows connection status and device name on hover
+- **Left-Click** (either): Opens **NetworkPanel**
+- **NetworkPanel Features**:
+  - WiFi section: Toggle switch, SSID, "WiFi Settings" button (opens impala TUI)
+  - Bluetooth section: Toggle switch, device name, "Bluetooth Settings" button (opens bluetui TUI)
+
+### Night Light Widget
+
+Blue light filter toggle using wlsunset.
+
+- **3-State Cycle**: Click cycles through Off → Auto → Forced → Off
+- **Icon Changes**: Different icons for each state
+- **Right-Click**: Toggle between Auto and Forced modes
+- **Auto-Hide**: Widget only appears if wlsunset is installed
+- **Service**: Uses `Services/System/NightLightService.qml`
+
 ## 🖱️ Panel Behavior
 
 All popup panels share consistent behavior:
