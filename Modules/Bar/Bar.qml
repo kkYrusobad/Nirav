@@ -282,6 +282,12 @@ Item {
           screen: root.screen
         }
 
+        // System Tray (before Wallpaper)
+        Tray {
+          anchors.verticalCenter: parent.verticalCenter 
+          screen: root.screen
+        }
+
 
       }
     }

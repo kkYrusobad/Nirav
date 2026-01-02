@@ -41,6 +41,7 @@ The name combines **Niri** + **Gruv**box, and references the Sanskrit word **न
 - 🖱️ **Click-outside-to-close** panels - click anywhere outside or press ESC
 - 📺 **On-Screen Display (OSD)** visual feedback for volume/brightness/media changes
 - ⚡ **Power Profiles** switch between Performance/Balanced/Power Saver modes
+- 🔔 **System Tray** displays tray icons with right-click context menus
 
 ## 📚 Documentation
 
@@ -121,7 +122,9 @@ niruv/
 │   │       ├── Visualizer.qml # Cava audio visualizer
 │   │       ├── Volume.qml     # Volume control widget
 │   │       ├── Brightness.qml # Brightness control widget
-│   │       └── NightLight.qml # Night light toggle widget
+│   │       ├── NightLight.qml # Night light toggle widget
+│   │       ├── Tray.qml       # System tray icons widget
+│   │       └── TrayMenu.qml   # Tray context menu popup
 │   ├── Cards/                 # Reusable card components
 │   │   ├── CalendarHeaderCard.qml  # Current date display
 │   │   ├── CalendarMonthCard.qml   # Month grid calendar
