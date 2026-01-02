@@ -99,6 +99,17 @@ Displays real-time system statistics in a compact capsule format.
 - **Click Action**: Opens **SystemMonitorPanel** with detailed stats and progress bars
 - **Service**: Uses `SystemStatService.qml` to poll `/proc/` filesystem every 3 seconds
 
+### ActiveWindow Widget
+
+Shows the currently focused window's icon and title.
+
+- **Window Icon**: Displays the icon from the focused window's app-id
+- **Window Title**: Shows truncated title (max 30 characters with ellipsis)
+- **Auto-Hide**: Widget disappears when no window is focused
+- **Hover Effect**: Capsule background turns primary color on hover
+- **Niri Integration**: Polls `niri msg -j focused-window` every 500ms
+- **Capsule Style**: Matches visual style of other bar widgets
+
 ### Wallpaper Widget
 
 A quick wallpaper changer widget.

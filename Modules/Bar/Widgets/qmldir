@@ -11,3 +11,4 @@ Wallpaper 1.0 Wallpaper.qml
 Volume 1.0 Volume.qml
 Brightness 1.0 Brightness.qml
 NightLight 1.0 NightLight.qml
+ActiveWindow 1.0 ActiveWindow.qml

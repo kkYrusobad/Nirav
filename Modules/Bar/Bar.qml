@@ -187,7 +187,7 @@ Item {
     anchors.rightMargin: 48
     spacing: Style.marginM
 
-    // Left section - Workspaces and SystemMonitor
+    // Left section - Workspaces, SystemMonitor, and ActiveWindow
     Item {
       Layout.fillHeight: true
       Layout.preferredWidth: leftRow.width
@@ -204,6 +204,11 @@ Item {
         }
 
         SystemMonitor {
+          anchors.verticalCenter: parent.verticalCenter
+          screen: root.screen
+        }
+
+        ActiveWindow {
           anchors.verticalCenter: parent.verticalCenter
           screen: root.screen
         }

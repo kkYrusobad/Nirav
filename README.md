@@ -22,6 +22,7 @@ The name combines **Niri** + **Gruv**box, and references the Sanskrit word **न
 - 🎨 **Gruvbox Material Dark** color scheme
 - 🖥️ **Workspace indicators** with Nerd Font icons and smooth animations
 - 📊 **System Monitor** showing CPU%, RAM%, temperature, and load average with threshold alerts
+- 🪟 **Active Window** shows focused window icon and title
 - 🖼️ **Wallpaper widget** click to set random wallpaper via swaybg
 - 🔋 **Battery widget** with hover effects, themed expansion, BatteryPanel with power profile controls
 - 🎥 **Screen Recorder** with recording status, hover expansion, and direct launch
@@ -110,6 +111,7 @@ niruv/
 │   │   └── Widgets/
 │   │       ├── Workspace.qml  # Workspace indicators
 │   │       ├── SystemMonitor.qml # CPU/RAM/Temp/Load display
+│   │       ├── ActiveWindow.qml  # Focused window icon + title
 │   │       ├── Wallpaper.qml  # Random wallpaper setter
 │   │       ├── Battery.qml    # Battery status widget
 │   │       ├── ScreenRecorder.qml # Screen recording widget
