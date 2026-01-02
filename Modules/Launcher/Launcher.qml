@@ -55,7 +55,10 @@ Item {
     searchText = "";
     selectedIndex = 0;
     searchInput.text = "";  // Clear search input
-    ApplicationsService.clearFilter();
+    
+    // Refresh apps to pick up newly installed applications
+    ApplicationsService.refreshApplications();
+    
     MenuService.reset();
     Qt.callLater(() => searchInput.forceActiveFocus());
   }

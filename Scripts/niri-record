@@ -1,11 +1,18 @@
 #!/bin/bash
 
 # niri-record - Toggle screen recording with gpu-screen-recorder
+# Requires: gpu-screen-recorder (install with: sudo pacman -S gpu-screen-recorder)
 
 PID_FILE="/tmp/niri-record.pid"
 VIDEO_DIR="$HOME/Videos"
 DATE=$(date +%Y-%m-%d_%H-%M-%S)
 FILENAME="$VIDEO_DIR/recording_$DATE.mp4"
+
+# Check for gpu-screen-recorder
+if ! command -v gpu-screen-recorder &>/dev/null; then
+    notify-send -u critical "Screen Recorder" "gpu-screen-recorder not found!\nInstall with: sudo pacman -S gpu-screen-recorder" -i "dialog-error"
+    exit 1
+fi
 
 # Ensure video directory exists
 mkdir -p "$VIDEO_DIR"

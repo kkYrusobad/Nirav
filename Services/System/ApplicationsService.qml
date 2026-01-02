@@ -104,12 +104,17 @@ Singleton {
 
   // Clear filter and reload apps
   function clearFilter() {
-    // Reload apps in case DesktopEntries wasn't ready earlier
-    if (allApps.length === 0) {
-      loadApplications();
-    }
     searchQuery = "";
     filteredApps = allApps.slice(0, 50);
+  }
+
+  // Refresh applications from disk (call after installing new apps)
+  function refreshApplications() {
+    Logger.i("ApplicationsService", "Refreshing applications list...");
+    isLoaded = false;
+    allApps = [];
+    filteredApps = [];
+    loadApplications();
   }
 
   // Launch an application
