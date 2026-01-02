@@ -110,6 +110,21 @@ Shows the currently focused window's icon and title.
 - **Niri Integration**: Polls `niri msg -j focused-window` every 500ms
 - **Capsule Style**: Matches visual style of other bar widgets
 
+### System Tray Widget
+
+Displays system tray icons from applications using the Quickshell SystemTray API.
+
+- **Icon Display**: Shows icons from nm-applet, blueman-applet, Discord, etc.
+- **Capsule Style**: Icons displayed in a rounded capsule background
+- **Left-Click**: Triggers the tray item's activate action
+- **Right-Click**: Opens context menu popup (TrayMenu) with full menu support
+- **Middle-Click**: Triggers secondary activate action if available
+- **Scroll**: Scrolls up/down on the tray item
+- **Submenu Support**: Context menus support nested submenus (hover to open)
+- **Click-Outside-to-Close**: Integrates with PanelState for click-outside behavior
+- **Auto-Hide**: Widget disappears when no tray items are present
+- **Startup**: Tray apps like `nm-applet` and `blueman-applet` should be started via Niri config
+
 ### Wallpaper Widget
 
 A quick wallpaper changer widget.
