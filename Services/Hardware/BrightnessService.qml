@@ -18,8 +18,15 @@ Singleton {
   // Current brightness level (0.0 - 1.0)
   property real brightness: 0.5
 
-  // Emit signal when brightness changes
-  onBrightnessChanged: brightnessUpdated()
+  // Flag to suppress OSD during internal changes (like AudioService)
+  property bool isSettingBrightness: false
+
+  // Only emit signal for external changes (from brightnessctl/function keys)
+  onBrightnessChanged: {
+    if (!isSettingBrightness) {
+      brightnessUpdated();
+    }
+  }
 
   // Whether brightness control is available
   property bool available: false
@@ -29,6 +36,15 @@ Singleton {
 
   // Minimum brightness to prevent complete blackout
   readonly property real minBrightness: 0.01
+
+  // Poll for external brightness changes (from function keys or brightnessctl)
+  Timer {
+    id: pollTimer
+    interval: 100
+    repeat: true
+    running: root.available
+    onTriggered: refreshBrightness()
+  }
 
   // Initialize on startup
   Component.onCompleted: {
@@ -86,6 +102,9 @@ Singleton {
     // Clamp value
     value = Math.max(minBrightness, Math.min(1.0, value));
     
+    // Set flag to suppress OSD for internal changes
+    isSettingBrightness = true;
+    
     // Update local state immediately for responsive UI
     brightness = value;
     
@@ -93,6 +112,9 @@ Singleton {
     var percent = Math.round(value * 100);
     setBrightnessProcess.targetValue = percent + "%";
     setBrightnessProcess.running = true;
+    
+    // Clear flag after a short delay
+    Qt.callLater(() => { isSettingBrightness = false; });
   }
 
   function increaseBrightness() {
