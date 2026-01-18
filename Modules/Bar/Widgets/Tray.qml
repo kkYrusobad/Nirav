@@ -18,7 +18,7 @@ Item {
   readonly property bool hasTrayItems: SystemTray.items && SystemTray.items.values && SystemTray.items.values.length > 0
 
   // Widget width slightly less than capsule - reduces gap on the right
-  implicitWidth: hasTrayItems ? capsule.width - 8 : 0
+  implicitWidth: hasTrayItems ? capsule.width : 0
   implicitHeight: Style.barHeight
   visible: hasTrayItems
 

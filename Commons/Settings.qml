@@ -36,11 +36,19 @@ Singleton {
   readonly property var data: ({
     "general": {
       "scaleRatio": 1.0,
-      "animationSpeed": 1.0
+      "animationSpeed": 1.0,
+      "radiusRatio": 1.0,
+      "screenRadiusRatio": 1.0,
+      "shadowOffsetX": 2,
+      "shadowOffsetY": 2,
+      "animationDisabled": false
     },
     "bar": {
       "enabled": true,
-      "position": "top"
+      "position": "top",
+      "density": "default",  // "mini", "compact", "default", "comfortable"
+      "showCapsule": true,
+      "capsuleOpacity": 0.5
     }
   })
 }

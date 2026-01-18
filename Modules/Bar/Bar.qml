@@ -16,11 +16,11 @@ Item {
 
   anchors.fill: parent
 
-  // Bar background
+  // Bar background (transparent for floating effect)
   Rectangle {
     id: barBackground
     anchors.fill: parent
-    color: Color.mSurface
+    color: "transparent"
   }
 
   // Left logo icon with backdrop
@@ -231,6 +231,12 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
         spacing: Style.marginM
 
+        // System Tray (first - system apps)
+        Tray {
+          anchors.verticalCenter: parent.verticalCenter 
+          screen: root.screen
+        }
+
         // Wallpaper widget
         Wallpaper {
           anchors.verticalCenter: parent.verticalCenter
@@ -279,12 +285,6 @@ Item {
         Battery {
           id: batteryWidget
           anchors.verticalCenter: parent.verticalCenter
-          screen: root.screen
-        }
-
-        // System Tray (before Wallpaper)
-        Tray {
-          anchors.verticalCenter: parent.verticalCenter 
           screen: root.screen
         }
 
