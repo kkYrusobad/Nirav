@@ -16,10 +16,11 @@ Item {
 
   anchors.fill: parent
 
-  // Bar background (transparent for floating effect)
+  // Bar background (Gruvbox Material Dark)
   Rectangle {
     id: barBackground
     anchors.fill: parent
+    // color: Color.mSurface
     color: "transparent"
   }
 
