@@ -1,78 +1,65 @@
 # Configuration
 
-Niruv is highly customizable through its settings system. This guide explains how to configure the shell to your liking.
+Niruv is highly customizable through its JSON-based settings system. This guide explains how to configure the shell.
 
 ## ⚙️ Settings Files
 
 Niruv stores its configuration in the standard XDG config directory:
 
-- **Settings**: `~/.config/noctalia/settings.json`
-- **Colors**: `~/.config/noctalia/colors.json`
+- **Settings**: `~/.config/niruv/settings.json`
 
-*Note: The folder name `noctalia` is inherited from the upstream project.*
+The shell will automatically create this file with default values on the first run.
 
-### Default Settings Structure
+### Settings Structure
 
 The `settings.json` file follows this structure:
 
 ```json
 {
-  "general": {
-    "scaleRatio": 1.0,
-    "animationSpeed": 1.0
-  },
-  "bar": {
-    "enabled": true,
-    "position": "top",
-    "widgets": {
-      "left": ["workspaces"],
-      "center": ["activeWindow"],
-      "right": ["systemMonitor", "volume", "battery", "clock"]
+    "bar": {
+        "capsuleOpacity": 0.5,
+        "density": "default",
+        "enabled": true,
+        "position": "top",
+        "showCapsule": true
+    },
+    "general": {
+        "animationDisabled": false,
+        "animationSpeed": 1,
+        "radiusRatio": 1,
+        "scaleRatio": 1,
+        "screenRadiusRatio": 1,
+        "shadowOffsetX": 2,
+        "shadowOffsetY": 2
     }
-  },
-  "dock": {
-    "enabled": true,
-    "position": "bottom",
-    "autohide": false
-  },
-  "notifications": {
-    "enabled": true,
-    "position": "top-right",
-    "maxVisible": 5
-  },
-  "colorSchemes": {
-    "darkMode": true,
-    "current": "gruvbox-dark"
-  }
 }
 ```
 
 ## 🖥️ Bar Configuration
 
-You can customize the position and content of the bar.
+You can customize the position and density of the bar.
 
 ### Position
 
 Supported values: `"top"`, `"bottom"`, `"left"`, `"right"`.
 
-### Widgets
+### Density
 
-You can arrange widgets in the `left`, `center`, and `right` sections of the bar. Available widgets include:
+Supported values:
 
-- `workspaces`: Niri workspace indicators
-- `clock`: Date and time
-- `battery`: Battery status
-- `volume`: Audio volume control
-- `brightness`: Screen brightness
-- `systemMonitor`: CPU/RAM usage
-- `activeWindow`: Title of the focused window
-- `tray`: System tray
+- `"mini"`: Smallest size
+- `"compact"`: Balanced size
+- `"default"` (Recommended)
+- `"comfortable"`: Larger elements and spacing
+
+## 🌙 Night Light
+
+Night light toggle uses `wlsunset`. Configuration for location/temp should be handled via user's `wlsunset` setup if applicable, though the shell provides a simple toggle.
 
 ## 🔧 Environment Variables
 
 You can override certain paths and behaviors using environment variables:
 
-- `NOCTALIA_DEBUG=1`: Enable debug logging.
-- `NOCTALIA_CONFIG_DIR`: Override the configuration directory.
-- `NOCTALIA_CACHE_DIR`: Override the cache directory.
-- `NOCTALIA_SETTINGS_FILE`: Override the specific settings file path.
+- `NIRUV_DEBUG=1`: Enable debug logging and reload popups.
+- `NIRUV_CONFIG_DIR`: Override the configuration directory (default: `~/.config/niruv/`).
+- `NIRUV_CACHE_DIR`: Override the cache directory (default: `~/.cache/niruv/`).

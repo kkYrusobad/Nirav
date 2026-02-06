@@ -59,7 +59,7 @@ Before installing Niruv, ensure you have the following dependencies installed:
 If you encounter issues or want to see detailed logs, you can run Niruv in debug mode:
 
 ```bash
-NOCTALIA_DEBUG=1 qs -c niruv
+NIRUV_DEBUG=1 qs -c niruv
 ```
 
 This will enable debug output in the terminal, which is useful for troubleshooting widget behavior or service connections.

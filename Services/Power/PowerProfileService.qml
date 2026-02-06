@@ -21,6 +21,9 @@ Singleton {
   // Current profile (PowerProfile.Performance, Balanced, or PowerSaver)
   property int profile: powerProfiles ? powerProfiles.profile : PowerProfile.Balanced
 
+  // Convenience for disabling expensive effects
+  readonly property bool performanceMode: profile === PowerProfile.Performance
+
   // Get human-readable name for a profile
   function getName(p) {
     if (!available) return "Unknown";
