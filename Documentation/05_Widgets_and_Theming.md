@@ -12,15 +12,15 @@ Colors are accessed via the `Color` singleton. We use Material Design 3 naming c
 
 | Property | Description | Hex |
 |----------|-------------|-----|
-| `Color.mPrimary` | Primary accent (Green) | `#b8bb26` |
-| `Color.mSecondary` | Secondary accent (Yellow) | `#fabd2f` |
-| `Color.mTertiary` | Tertiary accent (Aqua) | `#8ec07c` |
-| `Color.mOrange` | Orange accent | `#fe8019` |
-| `Color.mBlue` | Blue accent | `#83a598` |
+| `Color.mPrimary` | Primary accent (Green) | `#a9b665` |
+| `Color.mSecondary` | Secondary accent (Yellow) | `#d8a657` |
+| `Color.mTertiary` | Tertiary accent (Aqua) | `#89b482` |
+| `Color.mOrange` | Orange accent | `#e78a4e` |
+| `Color.mBlue` | Blue accent | `#7daea3` |
 | `Color.mPurple` | Purple accent | `#d3869b` |
-| `Color.mError` | Error state (Red) | `#fb4934` |
-| `Color.mSurface` | Background color | `#282828` |
-| `Color.mOnSurface` | Text color | `#fbf1c7` |
+| `Color.mError` | Error state (Red) | `#ea6962` |
+| `Color.mSurface` | Background color | `#32302f` |
+| `Color.mOnSurface` | Text color | `#dab997` |
 
 ### Styling (`Commons/Style.qml`)
 

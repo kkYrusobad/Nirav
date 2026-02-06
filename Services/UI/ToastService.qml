@@ -14,16 +14,13 @@ Singleton {
 
   // Show a warning notification
   function showWarning(title, message) {
-    notifyProcess.command = ["notify-send", "-u", "critical", "-i", "battery-caution", title, message];
-    notifyProcess.running = true;
+    NotificationService.post(title, message, "battery-caution", 2);
     Logger.i("ToastService", `Warning: ${title} - ${message}`);
   }
 
   // Show a normal notification
   function showNotice(title, message, icon) {
-    var iconName = icon || "dialog-information";
-    notifyProcess.command = ["notify-send", "-i", iconName, title, message];
-    notifyProcess.running = true;
+    NotificationService.post(title, message, icon || "dialog-information", 1);
     Logger.i("ToastService", `Notice: ${title} - ${message}`);
   }
 

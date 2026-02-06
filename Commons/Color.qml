@@ -10,42 +10,42 @@ import Quickshell
 Singleton {
   id: root
 
-  // --- Key Colors: Gruvbox Material Dark ---
-  readonly property color mPrimary: "#b8bb26"       // Green
-  readonly property color mOnPrimary: "#1d2021"     // Dark BG
+  // --- Key Colors: Gruvbox Material Dark Soft ---
+  readonly property color mPrimary: "#a9b665"       // Green (Soft)
+  readonly property color mOnPrimary: "#32302f"     // Soft BG
 
-  readonly property color mSecondary: "#fabd2f"     // Yellow
-  readonly property color mOnSecondary: "#1d2021"   // Dark BG
+  readonly property color mSecondary: "#d8a657"     // Yellow (Soft)
+  readonly property color mOnSecondary: "#32302f"   // Soft BG
 
-  readonly property color mTertiary: "#8ec07c"      // Aqua
-  readonly property color mOnTertiary: "#1d2021"    // Dark BG
+  readonly property color mTertiary: "#89b482"      // Aqua (Soft)
+  readonly property color mOnTertiary: "#32302f"    // Soft BG
 
   // --- Additional Gruvbox Colors ---
-  readonly property color mOrange: "#fe8019"
-  readonly property color mOnOrange: "#1d2021"
+  readonly property color mOrange: "#e78a4e"
+  readonly property color mOnOrange: "#32302f"
 
-  readonly property color mBlue: "#83a598"
-  readonly property color mOnBlue: "#1d2021"
+  readonly property color mBlue: "#7daea3"
+  readonly property color mOnBlue: "#32302f"
 
   readonly property color mPurple: "#d3869b"
-  readonly property color mOnPurple: "#1d2021"
+  readonly property color mOnPurple: "#32302f"
 
   // --- Utility Colors ---
-  readonly property color mError: "#fb4934"         // Red
-  readonly property color mOnError: "#1d2021"
+  readonly property color mError: "#ea6962"         // Red (Soft)
+  readonly property color mOnError: "#32302f"
 
   // --- Surface Colors ---
-  readonly property color mSurface: "#282828"       // BG0
-  readonly property color mOnSurface: "#fbf1c7"     // FG0 (Light)
+  readonly property color mSurface: "#32302f"       // BG Soft
+  readonly property color mOnSurface: "#dab997"     // FG (Soft)
 
   readonly property color mSurfaceVariant: "#3c3836" // BG1
-  readonly property color mOnSurfaceVariant: "#d5c4a1" // FG2
+  readonly property color mOnSurfaceVariant: "#bdad9c" // FG3-ish (Soft)
 
-  readonly property color mOutline: "#57514e"       // Gray border
+  readonly property color mOutline: "#504945"       // Gray border (Soft)
   readonly property color mShadow: "#1d2021"        // Hard black
 
-  readonly property color mHover: "#504945"         // BG2
-  readonly property color mOnHover: "#ebdbb2"       // FG1
+  readonly property color mHover: "#3c3836"         // BG1
+  readonly property color mOnHover: "#dab997"       // FG (Soft)
 
   // --- Absolute Colors ---
   readonly property color transparent: "transparent"

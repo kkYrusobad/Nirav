@@ -21,6 +21,7 @@ import qs.Services.System
 import qs.Modules.Bar
 import qs.Modules.Launcher
 import qs.Modules.OSD
+import qs.Modules.Notification
 
 ShellRoot {
   id: shellRoot
@@ -165,6 +166,9 @@ ShellRoot {
 
   // OSD overlay for volume, brightness, and media track changes
   OSD {}
+
+  // Notification overlay
+  Notification {}
 
   // TODO: Add IpcHandler when Quickshell version supports it
   // Usage: qs -c niruv ipc call launcher toggle

@@ -3,3 +3,4 @@ singleton ApplicationsService 1.0 ApplicationsService.qml
 singleton MenuService 1.0 MenuService.qml
 singleton SystemStatService 1.0 SystemStatService.qml
 singleton NightLightService 1.0 NightLightService.qml
+singleton NotificationService 1.0 NotificationService.qml
