@@ -66,18 +66,24 @@ For detailed guides on installation, configuration, and development, please refe
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/niruv.git
+git clone https://github.com/kkYrusobad/niruv.git
 cd niruv
 
-# Create symlink for Quickshell
-mkdir -p ~/.config/quickshell
-ln -sf "$(pwd)/Niruv" ~/.config/quickshell/niruv
+# Run the install script
+./install.sh
 
-# Run
+# Start the shell
 qs -c niruv
 ```
 
-For more detailed setup instructions, including dependencies for specific widgets, see [**INSTALL.md**](../INSTALL.md).
+The install script will:
+
+- Check and optionally install dependencies
+- Create config directories (`~/.config/niruv`, `~/.cache/niruv`)
+- Create Quickshell symlink
+- Optionally install [oNIgiRI](https://github.com/kkYrusobad/oNIgiRI) menu scripts
+
+For manual setup or more details, see the [Documentation](Documentation/02_Installation.md).
 
 ### Modern Portability
 

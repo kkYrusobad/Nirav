@@ -46,8 +46,8 @@ Singleton {
       return path.endsWith("/") ? path : path + "/";
     }
 
-    // 4. Default fallback for current workspace (avoids qrc: issues)
-    return "/home/kky/garbage/noctaliaChange/";
+    // 4. No fallback - require explicit configuration if other methods fail
+    return "";
   }
 
   readonly property string scriptsDir: projectDir + "Niruv/Scripts/"

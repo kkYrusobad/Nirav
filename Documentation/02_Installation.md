@@ -25,24 +25,30 @@ Before installing Niruv, ensure you have the following dependencies installed:
 1. **Clone the Repository**
 
     ```bash
-    git clone https://github.com/yourusername/niruv.git
+    git clone https://github.com/kkYrusobad/niruv.git
     cd niruv
     ```
 
-2. **Run the Setup Script**
+2. **Run the Install Script**
 
-    We provide a `setup.sh` script to automate dependency checks and symlink creation:
+    We provide an `install.sh` script to automate dependency installation, symlink creation, and optional oNIgiRI setup:
 
     ```bash
-    chmod +x setup.sh
-    ./setup.sh
+    ./install.sh
     ```
+
+    The script will:
+    - Check for required dependencies (quickshell, niri)
+    - Offer to install optional dependencies
+    - Create config directories
+    - Create the Quickshell symlink
+    - Optionally install [oNIgiRI](https://github.com/kkYrusobad/oNIgiRI) menu scripts
 
     Alternatively, you can manually create the link:
 
     ```bash
     mkdir -p ~/.config/quickshell
-    ln -sf "$(pwd)/Niruv" ~/.config/quickshell/niruv
+    ln -sf "$(pwd)" ~/.config/quickshell/niruv
     ```
 
 3. **Modern Portability & Troubleshooting**
