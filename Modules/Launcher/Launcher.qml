@@ -116,6 +116,16 @@ Item {
     border.color: Color.mOutline
     border.width: 1
 
+    // Shadow effect
+    Rectangle {
+      anchors.fill: parent
+      anchors.margins: -2
+      z: -1
+      radius: parent.radius + 2
+      color: Qt.alpha(Color.mShadow, 0.3)
+      visible: root.isOpen
+    }
+
 
     scale: root.isOpen ? 1.0 : 0.96
     Behavior on scale {

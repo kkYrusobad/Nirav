@@ -162,7 +162,8 @@ Item {
         "screen": root.screen
       });
       if (activeMenu) {
-        activeMenu.showAt(anchor, 0, Style.barHeight);
+        // Position relative to the icon, TrayMenu handle the rest based on bar position
+        activeMenu.showAt(anchor, anchor.width / 2, 0);
       }
     } else {
       Logger.e("Tray", "Failed to create menu: " + component.errorString());

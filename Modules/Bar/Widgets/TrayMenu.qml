@@ -32,13 +32,26 @@ PopupWindow {
   anchor.item: anchorItem
   anchor.rect.x: anchorX
   anchor.rect.y: anchorY
+  
+  anchor.gravity: {
+    if (isSubMenu) return Quickshell.Start; // Submenus open to the right (Start)
+    
+    // For root menu, center horizontally relative to the anchor point
+    // Note: Quickshell handles edge constraints automatically if the window would overflow
+    return Quickshell.Center;
+  }
+
+  anchor.edges: {
+    if (isSubMenu) return Quickshell.RightEdge;
+    
+    switch (Settings.data.bar.position) {
+      case "bottom": return Quickshell.TopEdge;
+      default:
+      case "top": return Quickshell.BottomEdge;
+    }
+  }
 
   function showAt(item, x, y) {
-    if (!item) {
-      Logger.w("TrayMenu", "anchorItem is undefined");
-      return;
-    }
-
     anchorItem = item;
     anchorX = x;
     anchorY = y;
@@ -83,17 +96,32 @@ PopupWindow {
     menu: root.menu
   }
 
-  // Background
+  // Background & Shadow
   Rectangle {
     anchors.fill: parent
     color: Color.mSurface
     border.color: Color.mOutline
-    border.width: 1
-    radius: 8
+    border.width: Style.borderS
+    radius: Style.radiusM
+
+    // Shadow effect (layered rectangle)
+    Rectangle {
+      anchors.fill: parent
+      anchors.margins: -2
+      z: -1
+      radius: parent.radius + 2
+      color: Qt.alpha(Color.mShadow, 0.3)
+      visible: root.visible
+    }
 
     opacity: root.visible ? 1.0 : 0.0
+    scale: root.visible ? 1.0 : 0.98
+    
     Behavior on opacity {
-      NumberAnimation { duration: 150; easing.type: Easing.OutQuad }
+      NumberAnimation { duration: Style.animationFast; easing.type: Easing.OutCubic }
+    }
+    Behavior on scale {
+      NumberAnimation { duration: Style.animationFast; easing.type: Easing.OutCubic }
     }
   }
 
@@ -126,9 +154,9 @@ PopupWindow {
           property var subMenu: null
 
           Layout.fillWidth: true
-          Layout.preferredHeight: modelData?.isSeparator ? 8 : 28
+          Layout.preferredHeight: modelData?.isSeparator ? 8 : 32
           color: Color.transparent
-          radius: 4
+          radius: Style.radiusS
 
           // Separator
           Rectangle {
@@ -142,14 +170,15 @@ PopupWindow {
           // Menu item content
           Rectangle {
             anchors.fill: parent
+            anchors.margins: modelData?.isSeparator ? 0 : 2
             color: itemMouse.containsMouse ? Color.mHover : Color.transparent
-            radius: 4
+            radius: Style.radiusS
             visible: !(modelData?.isSeparator ?? false)
 
             RowLayout {
               anchors.fill: parent
-              anchors.leftMargin: Style.marginM
-              anchors.rightMargin: Style.marginM
+              anchors.leftMargin: Style.marginL
+              anchors.rightMargin: Style.marginL
               spacing: Style.marginS
 
               // Menu item text
@@ -228,7 +257,7 @@ PopupWindow {
                     "parentMenu": root
                   });
                   if (menuItem.subMenu) {
-                    menuItem.subMenu.showAt(menuItem, root.menuWidth - 10, 0);
+                    menuItem.subMenu.showAt(menuItem, root.menuWidth - 4, 0);
                   }
                 } else {
                   Logger.e("TrayMenu", "Failed to create submenu: " + component.errorString());

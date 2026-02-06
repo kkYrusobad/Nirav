@@ -48,6 +48,15 @@ Variants {
           border.color: Color.mOutline
           border.width: Style.borderS
 
+          // Shadow effect
+          Rectangle {
+            anchors.fill: parent
+            anchors.margins: -2
+            z: -1
+            radius: parent.radius + 2
+            color: Qt.alpha(Color.mShadow, 0.3)
+          }
+
           RowLayout {
             id: contentLayout
             anchors.fill: parent
