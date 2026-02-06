@@ -2,6 +2,7 @@ pragma Singleton
 
 import QtQuick
 import Quickshell
+import Quickshell.Io
 
 /*
  * Niruv Settings - Simplified settings singleton
@@ -32,23 +33,87 @@ Singleton {
     return Quickshell.env("HOME") + "/.cache/niruv/";
   }
 
-  // Hard-coded default settings for barebones shell
-  readonly property var data: ({
-    "general": {
-      "scaleRatio": 1.0,
-      "animationSpeed": 1.0,
-      "radiusRatio": 1.0,
-      "screenRadiusRatio": 1.0,
-      "shadowOffsetX": 2,
-      "shadowOffsetY": 2,
-      "animationDisabled": false
-    },
-    "bar": {
-      "enabled": true,
-      "position": "top",
-      "density": "default",  // "mini", "compact", "default", "comfortable"
-      "showCapsule": true,
-      "capsuleOpacity": 0.5
+  property bool isSettingsLoaded: false
+
+  readonly property string settingsFile: configDir + "settings.json"
+
+  // Access via Settings.data.xxx.yyy
+  readonly property alias data: adapter
+
+  Component.onCompleted: {
+    // Ensure directories exist
+    Quickshell.execDetached(["mkdir", "-p", configDir]);
+    Quickshell.execDetached(["mkdir", "-p", cacheDir]);
+
+    // Set path to FileView to trigger loading
+    settingsFileView.adapter = adapter;
+    settingsFileView.path = settingsFile;
+  }
+
+  // Timer to debounced saving
+  Timer {
+    id: saveTimer
+    interval: 500
+    onTriggered: root.save()
+  }
+
+  function save() {
+    if (isSettingsLoaded) {
+      settingsFileView.writeAdapter();
     }
-  })
+  }
+
+  FileView {
+    id: settingsFileView
+    watchChanges: true
+    printErrors: true
+    
+    // When the file changes on disk, reload into adapter
+    onFileChanged: reload()
+    
+    // When the adapter changes in memory, save to disk (debounced)
+    onAdapterUpdated: saveTimer.restart()
+
+    onLoaded: {
+      if (!root.isSettingsLoaded) {
+        Logger.i("Settings", "Settings loaded from " + settingsFile);
+        root.isSettingsLoaded = true;
+      }
+    }
+
+    onLoadFailed: function(error) {
+      // If file doesn't exist, it will be created on the first write
+      if (error === 2) { // ENOENT
+        Logger.i("Settings", "Settings file not found, creating from defaults");
+        root.isSettingsLoaded = true;
+        save(); // Create the file with initial values
+      } else {
+        Logger.e("Settings", "Failed to load settings: " + error);
+      }
+    }
+    
+    adapter: adapter
+  }
+
+  JsonAdapter {
+    id: adapter
+
+    property JsonObject general: JsonObject {
+      property real scaleRatio: 1.0
+      property real animationSpeed: 1.0
+      property real radiusRatio: 1.0
+      property real screenRadiusRatio: 1.0
+      property int shadowOffsetX: 2
+      property int shadowOffsetY: 2
+      property bool animationDisabled: false
+    }
+
+    property JsonObject bar: JsonObject {
+      property bool enabled: true
+      property string position: "top"
+      property string density: "default"
+      property bool showCapsule: true
+      property real capsuleOpacity: 0.5
+    }
+  }
 }

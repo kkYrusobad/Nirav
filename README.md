@@ -84,15 +84,30 @@ NIRUV_DEBUG=1 qs -c niruv
 
 ## 🎛️ Customization
 
-### Workspace Icons
+Niruv can be configured without editing the source code via a JSON configuration file.
 
-Edit `Modules/Bar/Widgets/Workspace.qml` line 77:
+### Configuration File
 
-```qml
-property var workspaceIcons: ["", "", "", "", "5", "6", "7", "8", "9", "10"]
+The shell will automatically create a default configuration at:
+`~/.config/niruv/settings.json`
+
+You can customize the bar position, density, workspace icons, and more. Changes to this file are applied **instantly** (live-reloaded).
+
+### Example Settings
+
+```json
+{
+  "bar": {
+    "position": "top",
+    "density": "default",
+    "showCapsule": true
+  }
+}
 ```
 
-Browse icons at [nerdfonts.com/cheat-sheet](https://www.nerdfonts.com/cheat-sheet)
+### Manual Source Edits
+
+If you need to change something not yet in the JSON config, you can still edit the QML files. For example, to change workspace icons, edit `Modules/Bar/Widgets/Workspace.qml`.
 
 ## 📁 Project Structure
 

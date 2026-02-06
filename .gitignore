@@ -25,3 +25,6 @@ local.qml
 *.bak
 *.backup
 *.orig
+
+# Roadmap
+IMPROVEMENTS.md

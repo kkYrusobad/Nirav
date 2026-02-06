@@ -16,6 +16,7 @@ import qs.Commons
 
 // Services
 import qs.Services.System
+import qs.Services.UI
 
 // Modules
 import qs.Modules.Bar
@@ -33,9 +34,6 @@ ShellRoot {
     Logger.i("Shell", "---------------------------");
     Logger.i("Shell", "Niruv Shell Hello!");
     Logger.i("Shell", "---------------------------");
-
-    // Create launcher trigger file if it doesn't exist
-    initTrigger.running = true;
   }
 
 
@@ -64,20 +62,22 @@ ShellRoot {
 
       screen: modelData
 
-      // Layer shell anchors for top bar
+      // Layer shell anchors based on position
       anchors {
-        top: true
-        left: true
-        right: true
+        top: Settings.data.bar.position !== "bottom"
+        bottom: Settings.data.bar.position !== "top"
+        left: Settings.data.bar.position !== "right"
+        right: Settings.data.bar.position !== "left"
       }
 
       // Bar dimensions
-      implicitHeight: Style.barHeight
+      implicitHeight: (Settings.data.bar.position === "top" || Settings.data.bar.position === "bottom") ? Style.barHeight : 0
+      implicitWidth: (Settings.data.bar.position === "left" || Settings.data.bar.position === "right") ? Style.barHeight : 0
 
       // Layer shell properties
       WlrLayershell.namespace: "niruv-bar"
       WlrLayershell.layer: WlrLayer.Top
-      exclusiveZone: implicitHeight
+      exclusiveZone: (Settings.data.bar.position === "top" || Settings.data.bar.position === "bottom") ? implicitHeight : implicitWidth
 
       // Transparent background (we draw our own)
       color: "transparent"
@@ -170,60 +170,8 @@ ShellRoot {
   // Notification overlay
   Notification {}
 
-  // TODO: Add IpcHandler when Quickshell version supports it
-  // Usage: qs -c niruv ipc call launcher toggle
-  // For now, use keyboard shortcut in Niri config to run:
-  //   qs -c niruv ipc call launcher toggle
-  // Or spawn the shell and use a global keybind to trigger launcher
-
-  // =========================================
-  // File-based trigger for global keybindings
-  // =========================================
-  // Niri keybinding should run: date +%s%N > /tmp/niruv-launcher-toggle
-  // The shell polls this file and toggles the launcher when mtime changes
-
-  property string lastTriggerMtime: ""
-
-  Timer {
-    id: launcherTriggerPoll
-    interval: 200  // Poll every 200ms
-    repeat: true
-    running: true
-
-    onTriggered: {
-      mtimeChecker.running = true;
-    }
-  }
-
-  Process {
-    id: mtimeChecker
-    command: ["stat", "-c", "%Y", "/tmp/niruv-launcher-toggle"]
-    running: false
-
-    stdout: SplitParser {
-      onRead: data => {
-        const newMtime = data.trim();
-        if (shellRoot.lastTriggerMtime === "") {
-          // First read - just store the value
-          shellRoot.lastTriggerMtime = newMtime;
-        } else if (newMtime !== shellRoot.lastTriggerMtime) {
-          // File was modified
-          shellRoot.lastTriggerMtime = newMtime;
-          Logger.d("Shell", "Launcher trigger detected: " + newMtime);
-          launcher.toggle();
-        }
-      }
-    }
-  }
-
-
-
-
-  Process {
-    id: initTrigger
-    command: ["sh", "-c", "touch /tmp/niruv-launcher-toggle 2>/dev/null || true"]
-    running: false
-  }
+  // IPC Service for external triggers
+  IPCService {}
 }
 
 
