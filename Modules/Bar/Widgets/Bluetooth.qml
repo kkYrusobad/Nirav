@@ -88,7 +88,7 @@ Item {
   // --- Process to open bluetui ---
   Process {
     id: btProcess
-    command: ["sh", "-c", "rfkill unblock bluetooth; /home/kky/garbage/noctaliaChange/oNIgiRI/bin/niri-launch-or-focus-tui --floating --center --name Bluetooth bluetui"]
+    command: ["sh", "-c", "rfkill unblock bluetooth; " + Settings.oNIgiRIBinDir + "niri-launch-or-focus-tui --floating --center --name Bluetooth bluetui"]
   }
 
   // --- UI ---

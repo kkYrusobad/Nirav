@@ -179,8 +179,7 @@ Singleton {
   // Process to play alarm sound
   Process {
     id: alarmSoundProcess
-    //command: ["sh", "-c", "for i in 1 2 3; do paplay /usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga 2>/dev/null || paplay /usr/share/sounds/freedesktop/stereo/complete.oga 2>/dev/null || paplay /usr/share/sounds/gnome/default/alerts/glass.ogg 2>/dev/null; sleep 0.3; done"]
-    command: ["sh", "-c", "for i in 1 2 3; do paplay /home/kky/Downloads/peep.mp3; sleep 0.3; done"]
+    command: ["sh", "-c", "for i in 1 2 3; do paplay /usr/share/sounds/freedesktop/stereo/complete.oga 2>/dev/null || paplay /usr/share/sounds/freedesktop/stereo/message-new-instant.oga 2>/dev/null || paplay /usr/share/sounds/gnome/default/alerts/glass.ogg 2>/dev/null; sleep 0.3; done"]
     running: false
   }
 }

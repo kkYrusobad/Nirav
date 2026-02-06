@@ -12,7 +12,7 @@ Item {
   property ShellScreen screen: null
 
   // Wallpaper directory
-  readonly property string wallpaperDir: "/home/kky/Pictures/Wallpapers"
+  readonly property string wallpaperDir: Quickshell.env("HOME") + "/Pictures/Wallpapers"
 
   // Dimensions
   implicitWidth: iconText.implicitWidth
@@ -52,7 +52,7 @@ Item {
   // Process to set random wallpaper
   Process {
     id: wallpaperProcess
-    command: ["/home/kky/garbage/noctaliaChange/oNIgiRI/bin/niri-random-wallpaper"]
+    command: [Settings.oNIgiRIBinDir + "niri-random-wallpaper"]
   }
 
   // Mouse interaction

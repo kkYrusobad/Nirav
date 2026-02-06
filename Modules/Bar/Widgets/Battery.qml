@@ -233,7 +233,7 @@ Item {
   // --- Process Execution ---
   Process {
     id: battopProcess
-    command: ["/home/kky/garbage/noctaliaChange/oNIgiRI/bin/niri-launch-or-focus-tui", "--floating", "--center", "--name", "Battop", "battop"]
+    command: [Settings.oNIgiRIBinDir + "niri-launch-or-focus-tui", "--floating", "--center", "--name", "Battop", "battop"]
   }
 
   // --- Interaction ---

@@ -91,7 +91,7 @@ Item {
   // --- Process to open impala ---
   Process {
     id: wifiProcess
-    command: ["sh", "-c", "rfkill unblock wifi; /home/kky/garbage/noctaliaChange/oNIgiRI/bin/niri-launch-or-focus-tui --floating --center --name WiFi impala"]
+    command: ["sh", "-c", "rfkill unblock wifi; " + Settings.oNIgiRIBinDir + "niri-launch-or-focus-tui --floating --center --name WiFi impala"]
   }
 
   // --- UI ---

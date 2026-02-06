@@ -35,7 +35,7 @@ Singleton {
         { name: "Screenshot Region", icon: "󰹑", action: "cmd:niri-cmd-screenshot region" },
         { name: "Screenshot Full", icon: "󰍹", action: "cmd:niri-cmd-screenshot fullscreen" },
         { name: "Screenshot Clipboard", icon: "󰆏", action: "cmd:niri-cmd-screenshot clipboard" },
-        { name: "Screen Record", icon: "", action: "cmd:/home/kky/garbage/noctaliaChange/Niruv/Scripts/niri-record" },
+        { name: "Screen Record", icon: "", action: "cmd:" + Settings.scriptsDir + "niri-record" },
         { name: "Toggle Screensaver", icon: "󱄅", action: "cmd:niri-toggle-screensaver" },
         { name: "Toggle Nightlight", icon: "󰔎", action: "cmd:niri-toggle-nightlight" }
       ]
@@ -217,7 +217,7 @@ Singleton {
     if (action.startsWith("cmd:")) {
       const cmd = action.substring(4);
       // Add oNIgiRI bin directory to PATH for niri-* commands
-      const binPath = "/home/kky/garbage/noctaliaChange/oNIgiRI/bin";
+      const binPath = Settings.oNIgiRIBinDir;
       const fullCmd = "export PATH=\"" + binPath + ":$PATH\"; " + cmd;
       Quickshell.execDetached(["sh", "-c", fullCmd]);
       if (closeLauncher) closeLauncher();
@@ -226,7 +226,7 @@ Singleton {
 
 
     if (action.startsWith("edit:")) {
-      const file = action.substring(5).replace("~", "/home/" + Qt.platform.os);
+      const file = action.substring(5).replace("~", Quickshell.env("HOME"));
       // Use environment EDITOR or fallback to neovim
       Quickshell.execDetached(["sh", "-c", "${EDITOR:-nvim} " + file]);
       if (closeLauncher) closeLauncher();
@@ -249,7 +249,8 @@ Singleton {
     }
 
     if (action === "keybindings") {
-      Quickshell.execDetached(["sh", "-c", "niri-menu-keybindings 2>/dev/null || notify-send 'Keybindings' 'Not available'"]);
+      const binPath = Settings.oNIgiRIBinDir;
+      Quickshell.execDetached(["sh", "-c", "export PATH=\"" + binPath + ":$PATH\"; niri-menu-keybindings 2>/dev/null || notify-send 'Keybindings' 'Not available'"]);
       if (closeLauncher) closeLauncher();
       return true;
     }

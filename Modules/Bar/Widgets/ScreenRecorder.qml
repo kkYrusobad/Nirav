@@ -37,7 +37,7 @@ Item {
 
   Process {
     id: recordProcess
-    command: ["/home/kky/garbage/noctaliaChange/Niruv/Scripts/niri-record"]
+    command: [Settings.scriptsDir + "niri-record"]
     onExited: (code, status) => Logger.i("ScreenRecorder", "Process exited with code: " + code)
   }
 

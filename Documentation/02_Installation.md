@@ -29,18 +29,32 @@ Before installing Niruv, ensure you have the following dependencies installed:
     cd niruv
     ```
 
-2. **Configure Quickshell**
+2. **Run the Setup Script**
 
-    Quickshell looks for configuration in `~/.config/quickshell`. You can create a symbolic link to the cloned repository:
+    We provide a `setup.sh` script to automate dependency checks and symlink creation:
+
+    ```bash
+    chmod +x setup.sh
+    ./setup.sh
+    ```
+
+    Alternatively, you can manually create the link:
 
     ```bash
     mkdir -p ~/.config/quickshell
-    ln -sf $(pwd)/Niruv ~/.config/quickshell/niruv
+    ln -sf "$(pwd)/Niruv" ~/.config/quickshell/niruv
     ```
 
-    *Note: Ensure you link the `Niruv` folder from inside the repository.*
+3. **Modern Portability & Troubleshooting**
 
-3. **Run Niruv**
+    Niruv automatically detects its project root. If utilities like Screenshots or the Screensaver don't work, manually specify the project location:
+
+    ```bash
+    export NIRUV_PROJECT_DIR="/path/to/your/niruv-folder"
+    qs -c niruv
+    ```
+
+4. **Run Niruv**
 
     You can now launch the shell using the `qs` command:
 

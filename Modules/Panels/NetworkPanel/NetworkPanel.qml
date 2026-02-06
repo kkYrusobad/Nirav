@@ -139,12 +139,12 @@ PopupWindow {
   // === TUI Launch Processes ===
   Process {
     id: wifiTuiProcess
-    command: ["sh", "-c", "rfkill unblock wifi; /home/kky/garbage/noctaliaChange/oNIgiRI/bin/niri-launch-or-focus-tui --floating --center --name WiFi impala"]
+    command: ["sh", "-c", "rfkill unblock wifi; " + Settings.oNIgiRIBinDir + "niri-launch-or-focus-tui --floating --center --name WiFi impala"]
   }
 
   Process {
     id: btTuiProcess
-    command: ["sh", "-c", "rfkill unblock bluetooth; /home/kky/garbage/noctaliaChange/oNIgiRI/bin/niri-launch-or-focus-tui --floating --center --name Bluetooth bluetui"]
+    command: ["sh", "-c", "rfkill unblock bluetooth; " + Settings.oNIgiRIBinDir + "niri-launch-or-focus-tui --floating --center --name Bluetooth bluetui"]
   }
 
   // Panel background

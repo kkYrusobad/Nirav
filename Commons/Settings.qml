@@ -25,6 +25,34 @@ Singleton {
     return Quickshell.env("HOME") + "/.config/niruv/";
   }
 
+  // Project directory resolution
+  readonly property string projectDir: {
+    // 1. Check environment variable (highest priority)
+    var envPath = Quickshell.env("NIRUV_PROJECT_DIR");
+    if (envPath && envPath.length > 0) {
+      return envPath.endsWith("/") ? envPath : envPath + "/";
+    }
+
+    // 2. Check settings property
+    if (adapter.general.projectRoot && adapter.general.projectRoot.length > 0) {
+      let p = adapter.general.projectRoot;
+      return p.endsWith("/") ? p : p + "/";
+    }
+
+    // 3. Try to resolve via QML url (only use if it's a file:// url)
+    const url = Qt.resolvedUrl("../..").toString();
+    if (url.startsWith("file://")) {
+      let path = url.substring(7);
+      return path.endsWith("/") ? path : path + "/";
+    }
+
+    // 4. Default fallback for current workspace (avoids qrc: issues)
+    return "/home/kky/garbage/noctaliaChange/";
+  }
+
+  readonly property string scriptsDir: projectDir + "Niruv/Scripts/"
+  readonly property string oNIgiRIBinDir: projectDir + "oNIgiRI/bin/"
+
   readonly property string cacheDir: {
     var envDir = Quickshell.env("NIRUV_CACHE_DIR");
     if (envDir && envDir.length > 0) {
@@ -99,6 +127,7 @@ Singleton {
     id: adapter
 
     property JsonObject general: JsonObject {
+      property string projectRoot: ""
       property real scaleRatio: 1.0
       property real animationSpeed: 1.0
       property real radiusRatio: 1.0

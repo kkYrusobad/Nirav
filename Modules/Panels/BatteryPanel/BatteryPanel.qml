@@ -515,7 +515,7 @@ PopupWindow {
   // Process to open battop
   Process {
     id: battopProcess
-    command: ["/home/kky/garbage/noctaliaChange/oNIgiRI/bin/niri-launch-or-focus-tui", "--floating", "--center", "--name", "Battop", "battop"]
+    command: [Settings.oNIgiRIBinDir + "niri-launch-or-focus-tui", "--floating", "--center", "--name", "Battop", "battop"]
   }
 
   // Close on Escape key

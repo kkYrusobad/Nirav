@@ -67,19 +67,25 @@ For detailed guides on installation, configuration, and development, please refe
 ```bash
 # Clone the repository
 git clone https://github.com/yourusername/niruv.git
+cd niruv
 
 # Create symlink for Quickshell
 mkdir -p ~/.config/quickshell
-ln -sf /path/to/niruv ~/.config/quickshell/niruv
+ln -sf "$(pwd)/Niruv" ~/.config/quickshell/niruv
 
 # Run
 qs -c niruv
 ```
 
-### Debug Mode
+For more detailed setup instructions, including dependencies for specific widgets, see [**INSTALL.md**](../INSTALL.md).
+
+### Modern Portability
+
+Niruv automatically detects its project root. However, if you are running it from a non-standard location or via a wrapper, you can manually specify the path:
 
 ```bash
-NIRUV_DEBUG=1 qs -c niruv
+export NIRUV_PROJECT_DIR="/path/to/your/niruv-folder"
+qs -c niruv
 ```
 
 ## 🎛️ Customization
