@@ -5,8 +5,8 @@ import Quickshell
 import Quickshell.Io
 
 /*
- * Niruv Settings - Simplified settings singleton
- * TODO: Add file-based settings persistence
+ * Niruv Settings - Configuration singleton with JSON persistence
+ * Settings are stored in ~/.config/niruv/settings.json with live reload
  */
 Singleton {
   id: root
