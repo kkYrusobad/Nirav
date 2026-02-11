@@ -330,6 +330,48 @@ mkdir -p "$HOME/.config/niruv"
 mkdir -p "$HOME/.cache/niruv"
 echo -e "${GREEN}✓ Created ~/.config/niruv and ~/.cache/niruv${NC}"
 
+# Initialize settings.json with projectRoot
+# Get the parent directory of Niruv (the project root)
+PROJECT_ROOT="$(dirname "$NIRUV_DIR")"
+SETTINGS_FILE="$HOME/.config/niruv/settings.json"
+
+if [ ! -f "$SETTINGS_FILE" ]; then
+    echo -e "${BLUE}Initializing settings with project root: $PROJECT_ROOT${NC}"
+    cat > "$SETTINGS_FILE" << EOF
+{
+  "general": {
+    "projectRoot": "$PROJECT_ROOT/",
+    "scaleRatio": 1.0,
+    "animationSpeed": 1.0,
+    "radiusRatio": 1.0,
+    "screenRadiusRatio": 1.0,
+    "shadowOffsetX": 2,
+    "shadowOffsetY": 2,
+    "animationDisabled": false
+  },
+  "bar": {
+    "enabled": true,
+    "position": "top",
+    "density": "default",
+    "showCapsule": true,
+    "capsuleOpacity": 0.5
+  }
+}
+EOF
+    echo -e "${GREEN}✓ Created settings.json with projectRoot${NC}"
+else
+    # Update existing settings.json with projectRoot using jq if available
+    if command -v jq &> /dev/null; then
+        echo -e "${BLUE}Updating projectRoot in existing settings.json${NC}"
+        TMP_FILE=$(mktemp)
+        jq ".general.projectRoot = \"$PROJECT_ROOT/\"" "$SETTINGS_FILE" > "$TMP_FILE" && mv "$TMP_FILE" "$SETTINGS_FILE"
+        echo -e "${GREEN}✓ Updated projectRoot in settings.json${NC}"
+    else
+        echo -e "${YELLOW}Note: jq not found. Please manually add projectRoot to settings.json:${NC}"
+        echo -e "${YELLOW}  \"general\": { \"projectRoot\": \"$PROJECT_ROOT/\" }${NC}"
+    fi
+fi
+
 # ========================================
 # 5. Create Quickshell Symlink
 # ========================================
